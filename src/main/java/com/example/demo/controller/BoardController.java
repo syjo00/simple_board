@@ -5,10 +5,13 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.DTO.BoardSearchAllDTO;
+import com.example.demo.DTO.BoardWriteDTO;
+import com.example.demo.service.BoardInsertService;
 import com.example.demo.service.BoardSelectService;
 
 import lombok.AllArgsConstructor;
@@ -17,7 +20,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("board")
 public class BoardController {
-    private BoardSelectService boardService;
+    private BoardSelectService boardSelectService;
+    private BoardInsertService boardInsertService;
 
     // 게시판
 
@@ -27,7 +31,7 @@ public class BoardController {
     
     @GetMapping({"", "/list"})
     public String list(Model model, @RequestParam(value="page", defaultValue = "1") Integer pageNum) {
-        List<BoardSearchAllDTO> boardList = boardService.getAllBoard();
+        List<BoardSearchAllDTO> boardList = boardSelectService.getAllBoard();
         Integer[] pageList = new Integer[10];
 
         model.addAttribute("boardList", boardList);
@@ -35,4 +39,21 @@ public class BoardController {
 
         return "board/list";
     }
+
+
+    @GetMapping("/post")
+    public String write() {
+        return "board/write";
+    }
+
+
+    // 글을 쓴 뒤 POST 메서드로 글 쓴 내용을 DB에 저장
+    // 그 후에는 /list 경로로 리디렉션해준다.
+    
+    @PostMapping("/post")
+    public String write(BoardWriteDTO boardWriteDTO) {
+        boardInsertService.save(boardWriteDTO);
+        return "redirect:/board/list";
+    }
+
 }

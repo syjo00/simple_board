@@ -11,4 +11,13 @@
         FROM TB_BOARD
     </select>
 
+    <select id="selectIdMaxPlusOne" resultType="String">
+        SELECT MAX(id) + 1
+        FROM TB_BOARD
+    </select>
+
+    <insert id="saveBoard">
+      INSERT INTO TB_BOARD
+      VALUES(#{id},#{title},#{content},#{writer},now(),#{writer},now(),#{writer})
+    </insert>
 </mapper>

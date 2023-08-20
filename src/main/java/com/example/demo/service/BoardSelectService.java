@@ -25,4 +25,12 @@ public class BoardSelectService {
     public List<BoardSearchAllDTO> getAllBoard(){
         return boardMapper.selectAllBoard();
     }
+
+    /*
+     * 게시글 ID 맥스값 + 1 조회
+     */
+    public String selectIdMaxPlusOne() {
+        
+        return boardMapper.selectIdMaxPlusOne();
+    }
 }
