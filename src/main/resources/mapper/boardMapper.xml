@@ -20,4 +20,10 @@
       INSERT INTO TB_BOARD
       VALUES(#{id},#{title},#{content},#{writer},now(),#{writer},now(),#{writer})
     </insert>
+
+  <!-- 게시물 조회 쿼리 -->
+   <select id="getBoardById" parameterType="string" resultType="BoardSearchAllDTO">
+        SELECT * FROM TB_BOARD WHERE id = #{id}
+    </select>
+
 </mapper>
