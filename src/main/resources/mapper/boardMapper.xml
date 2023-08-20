@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC  "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="com.example.demo.mapper.BoardMapper">
+    <select id="selectAllBoard" resultType="com.example.demo.DTO.BoardDTO">
+        SELECT id
+        FROM simple_board.TB_BOARD
+    </select>
+
+    <insert id="insertid">
+        insert into simple_board.TB_BOARD(id)
+        values(3)
+    </insert>
+</mapper>

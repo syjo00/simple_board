@@ -12,14 +12,14 @@ import com.example.demo.mapper.BoardMapper;
 public class BoardService {
 
     @Autowired
-    private BoardMapper m;
+    private BoardMapper boardMapper;
 
 
     public List<BoardDTO> getAllBoard(){
 
         System.out.println("qjarms568===========================================");
 
-        List<BoardDTO> asdf = m.getAllBoard();
+        List<BoardDTO> asdf = boardMapper.selectAllBoard();
 
         for (BoardDTO boardDAO : asdf) {
             System.out.println("boardDao = " + boardDAO );
@@ -30,6 +30,6 @@ public class BoardService {
     }
 
     public void insertid(){
-        m.insertid();
+        boardMapper.insertid();
     }
 }

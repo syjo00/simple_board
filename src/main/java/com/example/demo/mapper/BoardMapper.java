@@ -8,7 +8,7 @@ import com.example.demo.DTO.BoardDTO;
 
 @Mapper
 public interface BoardMapper {
-    public List<BoardDTO> getAllBoard();
+    public List<BoardDTO> selectAllBoard();
 
     public void insertid();
 }
