@@ -20,12 +20,7 @@ public class BoardService {
         System.out.println("qjarms568===========================================");
 
         List<BoardDTO> asdf = boardMapper.selectAllBoard();
-
-        for (BoardDTO boardDAO : asdf) {
-            System.out.println("boardDao = " + boardDAO );
-        }
-
-
+        
         return asdf;
     }
 
