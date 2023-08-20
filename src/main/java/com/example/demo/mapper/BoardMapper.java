@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.demo.DTO.BoardDTO;
+import com.example.demo.DTO.BoardSearchAllDTO;
 
 @Mapper
 public interface BoardMapper {
-    public List<BoardDTO> selectAllBoard();
+    
+    // 게시판 전체글 조회.
+    public List<BoardSearchAllDTO> selectAllBoard();
 
 }

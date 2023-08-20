@@ -6,7 +6,7 @@
 
 
 <mapper namespace="com.example.demo.mapper.BoardMapper">
-    <select id="selectAllBoard" resultType="BoardDTO">
+    <select id="selectAllBoard" resultType="BoardSearchAllDTO">
         SELECT *
         FROM TB_BOARD
     </select>

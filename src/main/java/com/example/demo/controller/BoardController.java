@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.DTO.BoardDTO;
+import com.example.demo.DTO.BoardSearchAllDTO;
 import com.example.demo.service.BoardService;
 
 import lombok.AllArgsConstructor;
@@ -27,7 +27,7 @@ public class BoardController {
     
     @GetMapping({"", "/list"})
     public String list(Model model, @RequestParam(value="page", defaultValue = "1") Integer pageNum) {
-        List<BoardDTO> boardList = boardService.getAllBoard();
+        List<BoardSearchAllDTO> boardList = boardService.getAllBoard();
         Integer[] pageList = new Integer[10];
 
         model.addAttribute("boardList", boardList);
