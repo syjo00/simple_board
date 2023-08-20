@@ -14,17 +14,7 @@ public class BoardService {
     @Autowired
     private BoardMapper boardMapper;
 
-
     public List<BoardDTO> getAllBoard(){
-
-        System.out.println("qjarms568===========================================");
-
-        List<BoardDTO> asdf = boardMapper.selectAllBoard();
-        
-        return asdf;
-    }
-
-    public void insertid(){
-        boardMapper.insertid();
+        return boardMapper.selectAllBoard();
     }
 }

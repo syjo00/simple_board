@@ -10,5 +10,4 @@ import com.example.demo.DTO.BoardDTO;
 public interface BoardMapper {
     public List<BoardDTO> selectAllBoard();
 
-    public void insertid();
 }

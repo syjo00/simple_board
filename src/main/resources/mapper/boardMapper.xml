@@ -6,13 +6,9 @@
 
 
 <mapper namespace="com.example.demo.mapper.BoardMapper">
-    <select id="selectAllBoard" resultType="com.example.demo.DTO.BoardDTO">
-        SELECT id
-        FROM simple_board.TB_BOARD
+    <select id="selectAllBoard" resultType="BoardDTO">
+        SELECT *
+        FROM TB_BOARD
     </select>
 
-    <insert id="insertid">
-        insert into simple_board.TB_BOARD(id)
-        values(3)
-    </insert>
 </mapper>
