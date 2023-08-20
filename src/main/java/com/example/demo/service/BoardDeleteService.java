@@ -9,16 +9,9 @@ import com.example.demo.DTO.BoardSearchAllDTO;
 import com.example.demo.mapper.BoardMapper;
 
 @Service
-public class BoardService {
+public class BoardDeleteService {
 
     @Autowired
     private BoardMapper boardMapper;
 
-    /*  
-     * 게시판 전체건 조회.
-     * TO-DO : 페이징 추가 필요.
-     */
-    public List<BoardSearchAllDTO> getAllBoard(){
-        return boardMapper.selectAllBoard();
-    }
 }

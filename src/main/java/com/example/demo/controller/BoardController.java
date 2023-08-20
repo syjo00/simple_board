@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.DTO.BoardSearchAllDTO;
-import com.example.demo.service.BoardService;
+import com.example.demo.service.BoardSelectService;
 
 import lombok.AllArgsConstructor;
 
@@ -17,7 +17,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("board")
 public class BoardController {
-    private BoardService boardService;
+    private BoardSelectService boardService;
 
     // 게시판
 
