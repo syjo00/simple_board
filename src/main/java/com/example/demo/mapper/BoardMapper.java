@@ -19,6 +19,6 @@ public interface BoardMapper {
 
 
     // id를 통해 게시물 정보를 조회하는 메서드 추가
-     BoardSearchAllDTO getBoardById(String id);
+     BoardSearchAllDTO getBoardById(String id) throws Exception;
    
 }

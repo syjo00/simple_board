@@ -46,7 +46,7 @@
             <tbody>
               <tr th:each="board : ${boardList}">
                   <td th:text="${board.id}"></td>
-                  <td><a th:href="@{/board/detail/{id}(id=${board.id})}" th:text="${board.title}"></a></td>
+                  <td><a th:href="@{/board/detail/(id=${board.id})}" th:text="${board.title}"></a></td>
                   <td th:text="${board.writer}"></td>
               </tr>
           </tbody>
@@ -67,7 +67,6 @@
                 <input name="keyword" type="text" placeholder="검색어를 입력해주세요.">
                 <button class="btn btn-primary">검색하기</button>
             </div>
-
         </form>
 
       </div>

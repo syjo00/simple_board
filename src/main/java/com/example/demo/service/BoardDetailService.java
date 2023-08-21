@@ -13,7 +13,7 @@ public class BoardDetailService {
     private BoardMapper boardMapper;
 
     
-  public BoardSearchAllDTO getBoardById(String id) {
+  public BoardSearchAllDTO getBoardById(String id) throws Exception{
     
         return boardMapper.getBoardById(id); // boardById 메서드를 호출하도록 수정
     }
