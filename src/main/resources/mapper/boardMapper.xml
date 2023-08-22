@@ -26,4 +26,24 @@
         SELECT * FROM TB_BOARD WHERE id = #{id}
     </select>
 
+
+    <select id="getSearch"  resultType="BoardSearchAllDTO">
+        SELECT * 
+        FROM TB_BOARD
+        WHERE 
+        <choose>
+          <when test="searchType == 'title'">
+             title like concat ('%',#{keyword},'%')
+          </when>
+          <when test="searchType == 'content'">
+             content like concat ('%',#{keyword},'%')
+          </when>
+           <when test="searchType == 'title_content'">
+             content like concat ('%',#{keyword},'%')
+          </when>
+          <when test="searchType =='writer'">
+             writer like concat ('%',#{keyword},'%')
+          </when>          
+        </choose>
+    </select>
 </mapper>

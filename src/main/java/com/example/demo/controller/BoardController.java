@@ -20,6 +20,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("board")
 public class BoardController {
+    
     private BoardSelectService boardSelectService;
     private BoardInsertService boardInsertService;
 
@@ -30,9 +31,26 @@ public class BoardController {
     // list 경로에 요청 파라미터가 있을 경우 (?page=1), 그에 따른 페이지네이션을 수행함.
     
     @GetMapping({"", "/list"})
-    public String list(Model model, @RequestParam(value="page", defaultValue = "1") Integer pageNum) {
-        List<BoardSearchAllDTO> boardList = boardSelectService.getAllBoard();
+    public String list(Model model, 
+                       @RequestParam(value="page", defaultValue = "1") Integer pageNum,
+                       @RequestParam(value="searchType",required = false) String searchType,
+                       @RequestParam(value="keyword",required = false) String keyword) {
+                       //required = false는 파라미터가 필수가 아니어도 요청처리 가능.
+                               
+        
+        //게시판 전체 조회
+        List<BoardSearchAllDTO> boardList;
+        //페이징 처리 
         Integer[] pageList = new Integer[10];
+
+        if(searchType!=null && keyword !=null){
+            //검색결과 조회
+            boardList =  boardSelectService.getSearch(searchType,keyword);
+        
+        }else{         
+            //게시판 전체 조회
+            boardList = boardSelectService.getAllBoard();
+        }
 
         model.addAttribute("boardList", boardList);
         model.addAttribute("pageList", pageList);
@@ -48,8 +66,7 @@ public class BoardController {
 
 
     // 글을 쓴 뒤 POST 메서드로 글 쓴 내용을 DB에 저장
-    // 그 후에는 /list 경로로 리디렉션해준다.
-    
+    // 그 후에는 /list 경로로 리디렉션해준다.    
     @PostMapping("/post")
     public String write(BoardWriteDTO boardWriteDTO) {
         boardInsertService.save(boardWriteDTO);
