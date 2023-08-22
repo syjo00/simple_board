@@ -77,7 +77,7 @@
         </div>
 
         <!-- 검색 form -->       
-        <form action="/board/list" method="GET"> 
+        <form action="/board/list" method="GET" id="search-form"> 
             <div>
               <select name="searchType">
                 <option value="title">제목</option>
@@ -85,18 +85,60 @@
                 <option value="title_content">제목+내용</option>
                 <option value="writer">작성자</option>
               </select>
-                <input name="keyword" type="text" placeholder="검색어를 입력해주세요.">
-                <button class="btn btn-primary">검색하기</button>
+                <input name = "keyword" type="text" auto_complete = "false" placeholder="검색어를 입력해주세요.">
+                <button id = "srhbtn" class="btn btn-primary"  onclick="button1_click()">검색하기</button>
             </div>
+            <!-- http://localhost:8080/board/list?searchType=title_content -->
         </form> 
 
       </div>
     </main>
 
+
+  
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  
+    <script>
+     async function button1_click() {
+    const searchType = document.querySelector('select[name="searchType"]').value;
+    const keyword = document.getElementById("keyword").value;
+    
+    // 실제 검색 결과를 가져오는 AJAX 요청 코드 (가상의 API 요청)
+    const response = await fetch(`/api/search?searchType=${searchType}&keyword=${keyword}`);
+    const searchData = await response.json();
+    
+    // 검색 결과를 표시할 컨테이너
+    const searchResultsContainer = document.getElementById("search-form");
+    searchResultsContainer.innerHTML = ""; // 기존 결과 제거
+    
+    // 검색 결과 표시
+    for (const result of searchData.results) {
+        const resultItem = document.createElement("div");
+        resultItem.textContent = result.title; // 예시로 제목을 표시
+        searchResultsContainer.appendChild(resultItem);
+    }
+    
+    // URL 업데이트
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("searchType", searchType);
+    urlParams.set("keyword", keyword);
+    const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+    window.history.pushState(null, "", newUrl);
+    
+    // 검색 결과 표시 후 검색어 입력창 비우기
+    document.getElementById("keyword").value = "";
+}
+
+
+
+  
+
+
+    </script>
+  
   </body>
 </html>
