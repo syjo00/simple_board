@@ -46,4 +46,9 @@
           </when>          
         </choose>
     </select>
+
+    <delete id="beleteBoard">
+      delete from TB_BOARD
+      where id = #{id}
+    </delete>
 </mapper>
