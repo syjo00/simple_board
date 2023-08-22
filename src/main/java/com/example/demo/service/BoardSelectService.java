@@ -25,6 +25,14 @@ public class BoardSelectService {
     public List<BoardSearchAllDTO> getAllBoard(){
         return boardMapper.selectAllBoard();
     }
+    
+     /*
+     * 게시글 검색
+     */
+     public List<BoardSearchAllDTO> getSearch(String searchType,String keyword){
+        return boardMapper.selectAllBoard();
+    }
+
 
     /*
      * 게시글 ID 맥스값 + 1 조회
