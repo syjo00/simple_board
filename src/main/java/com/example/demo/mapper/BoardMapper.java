@@ -13,10 +13,8 @@ public interface BoardMapper {
     // 게시판 전체글 조회.
     public List<BoardSearchAllDTO> selectAllBoard();
 
-    // 게시판 아이디 시퀀스 조회.
     public String selectIdMaxPlusOne();
 
-    //게시글 저장.
     public void saveBoard(BoardWriteDTO boardWriteDTO);
 
 
@@ -26,8 +24,5 @@ public interface BoardMapper {
 
     //검색기능 + 페이징처리
     BoardSearchAllDTO getSearch(String searchType,String keyword);
-
-    // 게시글 삭제.
-    public void beleteBoard(String id);
 
 }
