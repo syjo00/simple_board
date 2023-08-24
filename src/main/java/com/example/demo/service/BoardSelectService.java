@@ -25,7 +25,9 @@ public class BoardSelectService {
      * TO-DO : 페이징 추가 필요.
      */
     public List<BoardSearchAllDTO> getAllBoard(){
+
         return boardMapper.selectAllBoard();
+
     }
     
      /*
@@ -48,7 +50,12 @@ public class BoardSelectService {
      * 게시글 ID 맥스값 + 1 조회
      */
     public String selectIdMaxPlusOne() {
-        
-        return boardMapper.selectIdMaxPlusOne();
+        String selectIdMaxPlusOne = boardMapper.selectIdMaxPlusOne();
+        // 게시글 최초 작성인 경우 1로 시작.
+        if (selectIdMaxPlusOne == null) {
+            return "1";
+        }
+
+        return selectIdMaxPlusOne;
     }
 }
