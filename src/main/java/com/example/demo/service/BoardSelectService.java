@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
+import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +31,18 @@ public class BoardSelectService {
      /*
      * 게시글 검색
      */
-     public List<BoardSearchAllDTO> getSearch(String searchType,String keyword){
-        return boardMapper.selectAllBoard();
-    }
+     public List<BoardSearchAllDTO> getSearch(@Param("searchType") String searchType, @Param("keyword")  String keyword){
 
+        HashMap<String,String> search= new HashMap<String,String>();
+
+        search.put("searchType",searchType);
+        search.put("keyword",keyword);
+
+        System.out.println("=====BoardSelectService.java=====");
+        System.out.println("searchType : " +searchType +" keyword : " +keyword);
+
+        return boardMapper.getSearch(search);
+    }
 
     /*
      * 게시글 ID 맥스값 + 1 조회

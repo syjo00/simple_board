@@ -28,24 +28,25 @@
     </select>
 
 
-    <select id="getSearch"  resultType="BoardSearchAllDTO">
+    <select id="getSearch" resultType="BoardSearchAllDTO">
         SELECT * 
         FROM TB_BOARD
         WHERE 
         <choose>
-          <when test="searchType == 'title'">
+          <when test="searchType.equals('title')">
              title like concat ('%',#{keyword},'%')
           </when>
-          <when test="searchType == 'content'">
+          <when test="searchType.equals('content')">
              content like concat ('%',#{keyword},'%')
           </when>
-           <when test="searchType == 'title_content'">
+           <when test="searchType.equals('title_content')">
              content like concat ('%',#{keyword},'%')
           </when>
-          <when test="searchType =='writer'">
+          <when test="searchType.equals('writer')">
              writer like concat ('%',#{keyword},'%')
           </when>          
         </choose>
+        order by id desc;
     </select>
 
     <delete id="beleteBoard">

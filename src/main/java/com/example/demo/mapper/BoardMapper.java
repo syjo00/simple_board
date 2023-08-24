@@ -1,5 +1,6 @@
 package com.example.demo.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -25,7 +26,7 @@ public interface BoardMapper {
     
 
     //검색기능 + 페이징처리
-    BoardSearchAllDTO getSearch(String searchType,String keyword);
+    List<BoardSearchAllDTO> getSearch(HashMap<String,String> search);
 
     // 게시글 삭제.
     public void beleteBoard(String id);
