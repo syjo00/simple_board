@@ -4,13 +4,16 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.DTO.BoardSearchAllDTO;
 import com.example.demo.DTO.BoardWriteDTO;
+import com.example.demo.service.BoardDeleteService;
 import com.example.demo.service.BoardInsertService;
 import com.example.demo.service.BoardSelectService;
 
@@ -23,6 +26,7 @@ public class BoardController {
     
     private BoardSelectService boardSelectService;
     private BoardInsertService boardInsertService;
+    private BoardDeleteService boardDeleteService;
 
     // 게시판
 
@@ -70,6 +74,14 @@ public class BoardController {
     @PostMapping("/post")
     public String write(BoardWriteDTO boardWriteDTO) {
         boardInsertService.save(boardWriteDTO);
+        return "redirect:/board/list";
+    }
+
+    // 게시물 삭제는 PostMapping 메서드를 사용하여 간단하게 삭제할 수 있다.
+    @PostMapping("/post/{no}")
+    public String delete(@PathVariable("no") String no) {
+        boardDeleteService.delete(no);
+
         return "redirect:/board/list";
     }
 

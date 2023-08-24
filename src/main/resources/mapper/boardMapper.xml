@@ -9,6 +9,7 @@
     <select id="selectAllBoard" resultType="BoardSearchAllDTO">
         SELECT *
         FROM TB_BOARD
+        ORDER BY ID DESC
     </select>
 
     <select id="selectIdMaxPlusOne" resultType="String">

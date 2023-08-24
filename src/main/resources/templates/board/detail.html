@@ -59,25 +59,28 @@
           </tbody>
         </table>
 
-        <!-- 수정/삭제 -->
+        <!-- 수정 -->
         <!-- <div>
             <a th:href="@{'/board/post/edit/' + ${boardSearchAllDTO.id}}">
                 <button class="btn btn-primary">수정</button>
             </a>
-        </div>
+        </div> -->
 
+        <!-- 삭제 -->
         <div>
-        <form id="delete-form" th:action="@{'/board/post/' + ${boardSearchAllDTO.id}}" method="post">
+        <form id="delete-form" th:action="@{'/board/post/' + ${board.id}}" method="post">
             <input type="hidden" name="_method" value="delete"/>
             <button class="btn btn-warning" id="delete-btn">삭제</button>
         </form>
-        <div> -->
+        <div> 
           
-
+      <!--
           <div class="btnClass">
             <button type="button" class="btn btn-primary">수정</button>
             <button type="button" class="btn btn-primary" style="margin-left : 30px;">삭제</button>
         </div>
+
+      -->
         
         
       </div>
