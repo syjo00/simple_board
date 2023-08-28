@@ -12,14 +12,11 @@ public class BoardInsertService {
 
     @Autowired
     private BoardMapper boardMapper;
-    @Autowired
-    private BoardSelectService boardSelectService;
 
     /*
      * 조회서비스에서 max+1 세팅 후 insert 실행.
      */
     public void save(BoardWriteDTO boardWriteDTO) {
-        boardWriteDTO.setId(boardSelectService.selectIdMaxPlusOne());
 
         boardMapper.saveBoard(boardWriteDTO);
     }

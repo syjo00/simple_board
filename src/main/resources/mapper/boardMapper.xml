@@ -12,14 +12,9 @@
         ORDER BY ID DESC
     </select>
 
-    <select id="selectIdMaxPlusOne" resultType="String">
-        SELECT MAX(id) + 1
-        FROM TB_BOARD
-    </select>
-
     <insert id="saveBoard">
-      INSERT INTO TB_BOARD
-      VALUES(#{id},#{title},#{content},#{writer},now(),#{writer},now(),#{writer})
+      INSERT INTO TB_BOARD(TITLE, CONTENT, WRITER, CREATOR, UPDATER)
+      VALUES(#{title},#{content},#{writer},#{writer},#{writer})
     </insert>
 
   <!-- 게시물 조회 쿼리 -->

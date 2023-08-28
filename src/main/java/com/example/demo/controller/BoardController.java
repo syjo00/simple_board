@@ -5,10 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -134,7 +132,7 @@ public class BoardController {
         System.out.println("==============수정 후 저장 (BoardController.java)==============");
 
         System.out.println("boardUpdateDTO : " +boardUpdateDTO);
-         boardUpdateService.updateBoard(boardUpdateDTO);
+        boardUpdateService.updateBoard(boardUpdateDTO);
         System.out.println("boardwritedto :" +boardUpdateDTO);
         return "redirect:/board/list";
     }
