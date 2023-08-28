@@ -45,20 +45,18 @@ public class BoardController {
                        @RequestParam(value="searchType",required = false) String searchType,
                        @RequestParam(value="keyword",required = false) String keyword) {
                        //required = false는 파라미터가 필수가 아니어도 요청처리 가능.
-                               
-        
         //게시판 전체 조회
         List<BoardSearchAllDTO> boardList;
         //페이징 처리 
-        Integer[] pageList = new Integer[10];
+        Integer[] pageList = boardSelectService.getPageList(searchType,keyword);
 
         if(searchType!=null && keyword !=null){
             //검색결과 조회
-            boardList =  boardSelectService.getSearch(searchType,keyword);
+            boardList =  boardSelectService.getSearch(searchType,keyword,pageNum);
         
         }else{         
             //게시판 전체 조회
-            boardList = boardSelectService.getAllBoard();
+            boardList = boardSelectService.getAllBoard(pageNum);
         }
 
         model.addAttribute("boardList", boardList);
