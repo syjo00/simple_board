@@ -34,8 +34,12 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu('home')" ></nav>
 
     <main role="main" class="container">
-      <div class="starter-template"  style = "margin-top : 180px">
+      <div class="page-header" style = "margin-top : 100px;">
+        <h1>게시글 목록</h1>
+      </div>
 
+      <div class="starter-template"  style = "margin-top : 50px">
+     
         <table class="table table-bordered">
             <!-- CONTENTS !-->
             <thead>
@@ -60,13 +64,20 @@
           
         </table>
         
+        <div style="margin: 10px">            
+            <!-- 글쓰기 버튼 -->
+            <a style="float: right" class="btn btn-primary" th:href="@{/board/post}">글쓰기</a>
+        </div>
+
         <!-- Pagination -->
-        <div style="margin: 10px">
-          <span th:each="pageNum : ${pageList}" th:inline="text">
-              <a th:href="@{'/board/list/?page=' + ${pageNum}}">[[${pageNum}]]</a>
-          </span>
-          <!-- 글쓰기 버튼 -->
-          <a style="float: right" class="btn btn-primary" th:href="@{/board/post}">글쓰기</a>
+        <div id = "paging">
+          <ul class="pagination pagination-sm ">
+            <li class="page-item"><a class="page-link" href="">이전</a></li>
+            <li class="page-item"><a class="page-link" href="">1</a></li>
+            <li class="page-item"><a class="page-link" href="">2</a></li>
+            <li class="page-item"><a class="page-link" href="">3</a></li>
+            <li><a class="page-link" href="">다음</a></li>
+          </ul>
         </div>
 
         <!-- 검색 form -->       
