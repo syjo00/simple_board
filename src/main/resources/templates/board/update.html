@@ -37,23 +37,43 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu('home')"></nav>
 
 
-    <main role="main" class="container">
-      <div class="starter-template">
-        <form role="update-form"  method="post">
-          <input type="hidden" name="_method" value="put"/>
-          <input type="hidden" name="id"/>
+    <main role="main" class="container" style = "margin-top : 180px">      
+          
+        <div class="starter-template">
+            <form class="form-horizontal" th:action="@{/board/post/update/{id}}" method="post">   
+              <input type="hidden" name="id" th:value="${board.id}"/>     
+              
+              <div class="form-group">
+                <label style="float: left" for="title" class="col-sm-2 control-label">제목</label>
+                    <div class="col-sm-10" style="margin-top: 10px;">
+                        <input type="title" class="form-control" id="title" name="title" placeholder="제목"/>
+                </div>
+            </div>
 
-          제목 : <input type="text" name="title" > <br>
-          작성자 : <input type="text" name="writer" > <br>
-          <textarea name="content" ></textarea><br>
+ 
+            <div class="form-group">
+                <label style="float: left" for="writer" class="col-sm-2 control-label">작성자</label>
+                    <div class="col-sm-10" style="margin-top: 10px;">
+                        <input type="writer" class="form-control" id="writer" name="writer" placeholder="작성자"/>
+                </div>
+            </div>
+ 
 
-          <div class="box-footer">
-            <button type="submit" class="btn btn-primary">수정</button>
-            <button type="submit" class="btn btn-warning">취소</button>
-          </div>
-        </form>
+            <div class="form-group">
+              <label style="float: left" for="content" class="col-sm-2 control-label">내용</label>
+              <div class="col-sm-10">
+                  <textarea class="form-control" id="content" name="content" placeholder="내용을 입력해 주세요."></textarea>
+              </div>
+            </div>
 
-      </div>
+            
+            <div class="box-footer">
+              <button type="submit" class="btn btn-primary">저장</button>
+              <button type="submit" class="btn btn-warning">취소</button>
+            </div>
+          </form>
+
+        </div>
     </main>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

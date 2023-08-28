@@ -24,10 +24,13 @@
 
   <!-- 게시물 조회 쿼리 -->
    <select id="getBoardById"  resultType="BoardSearchAllDTO">
-        SELECT * FROM TB_BOARD WHERE id = #{id}
+      
+      SELECT * FROM TB_BOARD WHERE id = #{id} 
+      
     </select>
 
-
+ 
+  <!-- 상세보기 -->
     <select id="getSearch" resultType="BoardSearchAllDTO">
         SELECT * 
         FROM TB_BOARD
@@ -53,4 +56,15 @@
       delete from TB_BOARD
       where id = #{id}
     </delete>
+
+
+   <!-- 수정하기 -->
+  <select id="updateBoard"  resultType="BoardUpdateDTO">       
+      UPDATE TB_BOARD
+      SET title = #{title}, content =#{content},writer = #{writer}, update_time = now()
+      WHERE ID = #{id}
+  </select>
+
+
+
 </mapper>

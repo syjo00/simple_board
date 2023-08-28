@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+
 import com.example.demo.DTO.BoardSearchAllDTO;
+import com.example.demo.DTO.BoardUpdateDTO;
 import com.example.demo.DTO.BoardWriteDTO;
 
 @Mapper
@@ -25,10 +27,13 @@ public interface BoardMapper {
      BoardSearchAllDTO getBoardById(String id);
     
 
-    //검색기능 + 페이징처리
+    //검색기능 
     List<BoardSearchAllDTO> getSearch(HashMap<String,String> search);
 
     // 게시글 삭제.
     public void beleteBoard(String id);
+
+    // 게시글 수정
+    public void updateBoard(BoardUpdateDTO updatedto);
 
 }
