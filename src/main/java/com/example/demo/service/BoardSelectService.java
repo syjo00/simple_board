@@ -1,13 +1,14 @@
 package com.example.demo.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.Common;
 import com.example.demo.DTO.BoardSearchAllDTO;
+import com.example.demo.DTO.BoardSearchDTO;
 import com.example.demo.mapper.BoardMapper;
 
 
@@ -24,25 +25,48 @@ public class BoardSelectService {
      * 게시판 전체건 조회.
      * TO-DO : 페이징 추가 필요.
      */
-    public List<BoardSearchAllDTO> getAllBoard(){
+    public List<BoardSearchAllDTO> getAllBoard(Integer pageNum){
 
-        return boardMapper.selectAllBoard();
+        BoardSearchDTO boardSearchDTO = new BoardSearchDTO(pageNum);
+
+        return boardMapper.selectAllBoard(boardSearchDTO);
 
     }
     
      /*
      * 게시글 검색
      */
-     public List<BoardSearchAllDTO> getSearch(@Param("searchType") String searchType, @Param("keyword")  String keyword){
+     public List<BoardSearchAllDTO> getSearch(@Param("searchType") String searchType, @Param("keyword")  String keyword, Integer pageNum){
 
-        HashMap<String,String> search= new HashMap<String,String>();
-
-        search.put("searchType",searchType);
-        search.put("keyword",keyword);
+        BoardSearchDTO boardSearchDTO = new BoardSearchDTO(pageNum,searchType,keyword);
 
         System.out.println("=====BoardSelectService.java=====");
         System.out.println("searchType : " +searchType +" keyword : " +keyword);
 
-        return boardMapper.getSearch(search);
+        return boardMapper.getSearch(boardSearchDTO);
+    }
+
+    /*
+     * 페이지 몇개인지 체크
+     */
+    public Integer[] getPageList(String searchType, String keyword) {
+        BoardSearchDTO boardSearchDTO = new BoardSearchDTO(searchType,keyword);
+
+        int allPage = boardMapper.countAllBoard(boardSearchDTO);
+
+        if((allPage % Common.PAGERECORDSIZE) == 0 ){
+            allPage = allPage / Common.PAGERECORDSIZE;
+        } else{
+            allPage = (allPage / Common.PAGERECORDSIZE) + 1;
+        }
+
+        Integer[] result = new Integer[allPage];
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = i + 1;
+        }
+
+        
+        return result;
     }
 }
