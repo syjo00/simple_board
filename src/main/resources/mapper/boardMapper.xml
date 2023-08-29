@@ -10,7 +10,6 @@
         SELECT *
         FROM TB_BOARD
         ORDER BY ID DESC
-        limit #{page},#{recordSize}
     </select>
 
     <insert id="saveBoard">
@@ -45,8 +44,7 @@
              writer like concat ('%',#{keyword},'%')
           </when>          
         </choose>
-        order by id desc
-        limit #{page},#{recordSize}
+        order by id desc;
     </select>
 
     <delete id="beleteBoard">
@@ -62,10 +60,6 @@
       WHERE ID = #{id}
   </select>
 
-  <select id="countAllBoard"  resultType="int">       
-      SELECT COUNT(*)
-      FROM TB_BOARD
-  </select>
 
 
 </mapper>
