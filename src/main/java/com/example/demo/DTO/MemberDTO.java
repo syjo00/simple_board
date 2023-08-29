@@ -1,6 +1,9 @@
 package com.example.demo.DTO;
 
-public class MemberDTO {
+import lombok.Data;
+
+@Data
+public class MemberDTO {    
     
     private String id;
     private String pw;
@@ -9,6 +12,6 @@ public class MemberDTO {
     private String creation_time;
     private String creator;
     private String update_time;
-    private String updator;
-    
+    private String updater;
+
 }
