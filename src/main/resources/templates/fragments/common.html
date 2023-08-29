@@ -25,6 +25,15 @@
               <span class="sr-only" th:if="${menu} == 'home'">(current)</span>
             </a>
           </li>
+          
+          <li class="nav-item" th:classappend="${menu} == 'entr'? 'active'">
+            <a class="nav-link" href="#" th:href="@{/board/entr}">
+              회원가입
+              <span class="sr-only" th:if="${menu} == 'entr'">(current)</span>
+            </a>
+          </li>
+
+
           <li class="nav-item" th:classappend="${menu} == 'board'? 'active'">
             <a class="nav-link" href="#" th:href="@{/board/list}">
               게시판
