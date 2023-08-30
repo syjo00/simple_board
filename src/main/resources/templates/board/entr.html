@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/common :: head('게시판입니다.')">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/js/bootstrap.min.js" integrity="sha512-fHY2UiQlipUq0dEabSM4s+phmn+bcxSYzXP4vAXItBvBHU7zAM/mkhCZjtBEIJexhOMzZbgFlPLuErlJF2b+0g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <title>Sign up</title>
+    <title>회원 가입</title>
     
              <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
-    <link href="css/starter-template.css" rel="stylesheet"/>
+
 
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
@@ -17,89 +19,80 @@
     </script>
 
     <style>
-       body {text-align:center; 
-            font-size:20px;
-            
-    
-        }
+    body {
+        text-align:center; 
+        font-size:20px;              
+    }
 
-     
-  
+
     </style>
 </head> 
 
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu('home')"></nav>
 
-    <main role="main">
-        <div class="page-header" style = "margin-top : 100px;">
          
-        </div>
+
+    <main role="main" style="align :center">
+    
   
-        <div class="starter-template"  style = "margin-top :350px; margin-left : 800px;">
-            <h1>회원가입</h1>
+        <div class="starter-template"  style = "margin-top :350px; margin-left : 800px;">            
+                    
             <form class="form-horizontal" action="#" th:action="@{/board/entr}" method="post">
-                   
+                <h2 style="margin-left : 250px; margin-bottom: 20px;">회원가입</h2> 
+   
                 <div class="form-group">                        
                         <div class="col-sm-10" style="margin-top: 20px;">                              
-                        <input style="width : 600px;" type="name" id="name" name = "name" placeholder="이름을 입력하세요 ex) Angelina Jolie" class="form-control" />                             
+                        <input style="width : 600px;" type="name" id="name" name = "name" placeholder="이름을 입력하세요 ex) Angelina Jolie" class="form-control" autocomplete="name" />                             
                     </div>
                 </div>    
-
     
-               
+            
                 <div class="form-group">
                         <div class="col-sm-10" style="margin-top: 20px;">
-                            <input style="width : 600px; " type="id" id="id" name="id" placeholder="아이디를 입력하세요" class="form-control"  />    
-                        
+                            <input style="width : 600px; " type="id" id="id" name="id" placeholder="아이디를 입력하세요" class="form-control"  autocomplete="id"/>                            
                     </div>
                 </div>
     
                 
                 <div class="form-group">                        
                         <div class="col-sm-10" style="margin-top: 20px;">                                         
-                            <input style="width : 600px; " type="pw" class="form-control" id="pw" name="pw" placeholder=" 비밀번호를 입력하세요 ex) ******** "/>
+                            <input style="width : 600px; " type="pw" class="form-control" id="pw" name="pw" placeholder=" 비밀번호를 입력하세요 ex) ********"/>
                     </div>
                 </div>
     
-                <div class="form-group">
-                    
-                        <div class="col-sm-10" style="margin-top: 20px;">                                    
-                            <input style="width : 600px; " type="pw2" class="form-control" id="pw2" name="pw2" placeholder="비밀번호를 한번 더 입력하세요"/>
+                <div class="form-group">                    
+                    <div class="col-sm-10" style="margin-top: 20px;">                                    
+                        <input style="width : 600px; " type="pw2" class="form-control" id="pw2" name="pw2" placeholder="비밀번호를 한번 더 입력하세요"/>
+                        <label id="pwConfirm"></label> 
                     </div>
                 </div>
 
                 <div class="form-group">                       
                         <div class="col-sm-10" style="margin-top: 20px;">                                                            
-                            <input style="width : 600px;" type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요 ex)genius@naver.com"/>
+                            <input style="width : 600px;" type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요 ex)genius@naver.com" autocomplete="email"/>
                     </div>
                 </div>
-    
-            
-                <!-- <div class="form-group" id="propose">
-                    <label for="email">약관</label>
-                    <input id="email" type="propose" th:field="*{propose}" class="form-control"
-                           placeholder="ex) abc@example.com" aria-describedby="emailHelp" required> </div> -->
-                 
-    
+                
+                <button 
+                    type="button" 
+                    class="btn btn-primary" 
+                    data-toggle="modal" 
+                    data-target="#exampleModal" 
+                    onclick ="ContPopUp()"
+                    style ="width :100px; margin-left :350px; position:fixed;">약관동의</button>
+                
+
                 <div class="form-group" id="entrBtn">
-                    <button class="btn btn-primary btn-block" type="input"
+                   
+                    <button class="btn btn-primary btn-block" type="input" id="EntrBtn"
                             style ="width :100px; margin-left :500px; position:fixed; "
                             aria-describedby="submitHelp" onclick ="entr()">가입하기
                     </button>
                 </div>
-                        
-                        
-        
-
+                
+               
             </form>
-          
-         <!-- <footer th:fragment="footer" id="footer">
-                 <div class="row justify-content-center"> 
-                    <small class="d-flex mb-3 text-muted">한번 가입하면 탈퇴는 없다(인)</small>
-                </div> 
-            </footer>
-        -->
           
          
         </div>
@@ -107,13 +100,81 @@
   
       
 </body>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
-function entr(){
 
-    alert("가입이 완료되었습니다.");
+
+$("#id,#name,#email").click(function(){
+
+let id = $("#id").val();
+let name = $("#name").val();
+let email = $("#email").val();
+
+if(id ===null || name===null || email ===null){
+    $("#EntrBtn").prop("disabled", true);
+        return false;           
+} else {
+    $("#EntrBtn").prop("disabled", false);
 }
 
 
+}); 
+
+/* 참고
+  $("input[name=name2]").click(function (e) {
+        var result = $("input[name=name1]").val();
+        if (!result) {
+            alert("내용을 입력하십시오");
+            $('#id').text('*입력해주세요');
+            $('#id').css('color', 'red');
+        }
+    })
+
+
+*/
+
+
+
+        $("#pw,#pw2").keyup(function(){
+
+        let p1 = $("#pw").val();
+        let p2 = $("#pw2").val();
+
+        if(p1 =='' && p2==''){
+            $("#pwConfirm").text("");
+            return;
+        }
+
+        if(p1 == p2){
+            $("#pwConfirm").text("비밀번호 일치").css('color','#00FF00');
+            $("#EntrBtn").prop("disabled", false);
+            return;
+        } else {
+            $("#pwConfirm").text("비밀번호 불일치").css('color','#be0000');
+            $("#EntrBtn").prop("disabled", true);
+            return false;
+        }
+
+        });
+
+        function entr(){
+          
+                alert("가입이 완료되었습니다.");            
+                
+        }
+
+        function ContPopUp(){
+
+            var url = "board/contract.html";
+            var name = "ContPopup";
+            var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+            window.open(url, name, option);
+
+        }
+
+      
+
+     
 </script>
 
 
