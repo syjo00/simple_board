@@ -179,7 +179,7 @@ public class BoardController {
 
 
 
-    private String showMessageAndRedirect(final MessageDTO params, Model model) {
+    private String showMessageAndRedirect(MessageDTO params, Model model) {
         model.addAttribute("params", params);
         return "fragments/messageRedirect";
     }

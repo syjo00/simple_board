@@ -32,7 +32,7 @@ public class MemberController {
         
         MessageDTO message;
         if(memberEntrService.entr(MemberDTO)){
-            message = new MessageDTO(Common.SAVESUCCES01, "", RequestMethod.GET, null);
+            message = new MessageDTO(Common.SAVESUCCES01, "/", RequestMethod.GET, null);
         }
         else{
             message = new MessageDTO(Common.FAIL01, "/", RequestMethod.GET, null);

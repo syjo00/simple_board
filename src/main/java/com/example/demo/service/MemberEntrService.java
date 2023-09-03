@@ -17,13 +17,10 @@ public class MemberEntrService {
         System.out.println("memberDTO - MemberEntrService :" + memberDTO);
         try {
             memberMapper.entrMember(memberDTO);
-            
         } catch (Exception e) {
             return false;
         }
-
         return true;
-
     }
   
 }
