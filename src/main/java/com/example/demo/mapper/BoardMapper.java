@@ -36,6 +36,10 @@ public interface BoardMapper {
     // 게시글 수정
     public void updateBoard(BoardUpdateDTO updatedto);
 
-    public int countAllBoard(BoardSearchDTO boardSearchDTO);
+    //게시글 전체 count 조회.
+    public int countAllBoard();
+
+    //게시글 검색 count 조회.
+    public int countSearchBoard(BoardSearchDTO boardSearchDTO);
 
 }

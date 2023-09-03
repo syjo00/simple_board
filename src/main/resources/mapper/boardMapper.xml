@@ -67,5 +67,25 @@
       FROM TB_BOARD
   </select>
 
+    <select id="countSearchBoard"  resultType="int">       
+      SELECT COUNT(*)
+      FROM TB_BOARD
+      WHERE 1=1
+        <choose>
+          <when test="searchType.equals('title')">
+            and title like concat ('%',#{keyword},'%')
+          </when>
+          <when test="searchType.equals('content')">
+            and content like concat ('%',#{keyword},'%')
+          </when>
+           <when test="searchType.equals('title_content')">
+            and content like concat ('%',#{keyword},'%')
+          </when>
+          <when test="searchType.equals('writer')">
+            and writer like concat ('%',#{keyword},'%')
+          </when>          
+        </choose>
+  </select>
+
 
 </mapper>

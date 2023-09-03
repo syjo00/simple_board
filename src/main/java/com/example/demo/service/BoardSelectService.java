@@ -50,9 +50,19 @@ public class BoardSelectService {
      * 페이지 몇개인지 체크
      */
     public Integer[] getPageList(String searchType, String keyword) {
+
+        int allPage;
         BoardSearchDTO boardSearchDTO = new BoardSearchDTO(searchType,keyword);
 
-        int allPage = boardMapper.countAllBoard(boardSearchDTO);
+        // 검색조건, 검색어 둘중 하나라도 null일시 전체건으로 체크
+        if(searchType == null || keyword == null){
+            //전체건 조회
+            allPage = boardMapper.countAllBoard();
+        }
+        else{
+             // 검색건 조회.
+            allPage = boardMapper.countSearchBoard(boardSearchDTO);
+        }
 
         if((allPage % Common.PAGERECORDSIZE) == 0 ){
             allPage = allPage / Common.PAGERECORDSIZE;
