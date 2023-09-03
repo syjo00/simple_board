@@ -63,6 +63,14 @@ public class BoardController {
             boardList = boardSelectService.getAllBoard(pageNum);;
         }
 
+        //검색한거 남길때 null로 그대로 들어가는 경우가 있어. null로 닦아주기.
+        if(Common.STRING_NULL_CHECK(searchType)){
+            pageInfo.setSearchType(null);
+        }
+        if(Common.STRING_NULL_CHECK(keyword)){
+            pageInfo.setKeyword(null);
+        }
+
         model.addAttribute("boardList", boardList);
         model.addAttribute("pageList", pageList);
         model.addAttribute("pageInfo", pageInfo);
