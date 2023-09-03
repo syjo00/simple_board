@@ -19,7 +19,6 @@ public class MemberEntrService {
             memberMapper.entrMember(memberDTO);
             
         } catch (Exception e) {
-            // TODO: handle exception
             return false;
         }
 

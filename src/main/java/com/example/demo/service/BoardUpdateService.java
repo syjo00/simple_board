@@ -21,7 +21,6 @@ public class BoardUpdateService {
       try {
         boardMapper.updateBoard(updatedto);
       } catch (Exception e) {
-        // TODO: handle exception
         return false;
       }
       return true;

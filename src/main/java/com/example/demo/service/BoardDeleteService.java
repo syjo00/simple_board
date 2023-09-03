@@ -16,7 +16,6 @@ public class BoardDeleteService {
         try {
             boardMapper.beleteBoard(id);
         } catch (Exception e) {
-            // TODO: handle exception
             return false;
         }
 

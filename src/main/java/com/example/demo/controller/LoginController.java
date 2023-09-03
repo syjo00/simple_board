@@ -1,12 +1,7 @@
 package com.example.demo.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,19 +34,18 @@ public class LoginController {
         //1. 로그인 체크 서비스 호출.
         boolean logInCheck = loginService.logInCheck(memberDTO);
 
+        //2/ 로그인 맞을시 세션 생성.
         if(logInCheck){
 
+            //2-1 세션에 넣을 Memeber_id, name 조회.
             MemberDTO sessionMember = loginService.getMember(memberDTO);
 
-            //2. 세션 생성 후 이름 넣기.
+            //2-2. 세션 생성 후 이름 넣기.
             HttpSession session = request.getSession(true);
             session.setAttribute("userId", sessionMember.getMember_no());
             session.setAttribute("name", sessionMember.getName());
-            System.out.println( "qjarms568 세션 시간 : " +session.getMaxInactiveInterval());
-            
-            Map<String,Object> data = new HashMap<>();
-            data.put("name", session.getAttribute("name"));
-            message = new MessageDTO(sessionMember.getName() + " 로그인성공.", "/", RequestMethod.GET,data);
+
+            message = new MessageDTO(sessionMember.getName() + " 로그인성공.", "/", RequestMethod.GET,null);
         }else{
             message = new MessageDTO("로그인실패.", "/", RequestMethod.GET, null);
         }
