@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -51,11 +52,11 @@ public class BoardController {
                        //required = false는 파라미터가 필수가 아니어도 요청처리 가능.
         //게시판 전체 조회
         List<BoardSearchAllDTO> boardList;
-        Integer[] pageList;
+        ArrayList<String> pageList;
         BoardSearchDTO pageInfo = new BoardSearchDTO(pageNum, searchType, keyword);
         
         //페이징.
-        pageList = boardSelectService.getPageList(searchType,keyword);
+        pageList = boardSelectService.getPageList(searchType,keyword,pageNum);
 
         if(!Common.STRING_NULL_CHECK(searchType) && !Common.STRING_NULL_CHECK(keyword)){
             //검색결과 조회

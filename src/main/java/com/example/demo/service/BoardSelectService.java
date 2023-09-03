@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -49,7 +50,7 @@ public class BoardSelectService {
     /*
      * 페이지 몇개인지 체크
      */
-    public Integer[] getPageList(String searchType, String keyword) {
+    public ArrayList<String> getPageList(String searchType, String keyword, int pageNum) {
 
         int allPage;
         BoardSearchDTO boardSearchDTO = new BoardSearchDTO(searchType,keyword);
@@ -69,13 +70,20 @@ public class BoardSelectService {
             allPage = (allPage / Common.PAGERECORDSIZE) + 1;
         }
 
-        Integer[] result = new Integer[allPage];
+        ArrayList<String> result = new ArrayList<>();
 
-        for (int i = 0; i < result.length; i++) {
-            result[i] = i + 1;
+        for (int i = 0; i < allPage; i++) {
+            result.add(Integer.toString(i + 1));
         }
 
-        
+
+        if(pageNum != 1){
+            result.add(0, "이전");
+        }
+        if(pageNum != allPage){
+            result.add("다음");
+        }
+
         return result;
     }
 }
