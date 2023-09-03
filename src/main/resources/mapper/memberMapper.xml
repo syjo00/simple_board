@@ -7,9 +7,22 @@
 
 <mapper namespace="com.example.demo.mapper.MemberMapper">
 
-    <insert id="entrMember">
-      INSERT INTO TB_Member(id, pw, name, email,creation_time,creator,update_time,updater)
-      VALUES(#{id},#{pw},#{name},#{email},now(),#{id},#{update_time},#{updater})
-    </insert>
+  <insert id="entrMember">
+    INSERT INTO TB_Member(id, pw, name, email,creation_time,creator,update_time,updater)
+    VALUES(#{id},#{pw},#{name},#{email},now(),#{id},#{update_time},#{updater})
+   </insert>
 
+  <select id="logInCheck"  resultType="int">       
+    SELECT COUNT(*)
+    FROM TB_Member
+    WHERE Id = #{id}
+    AND pw = #{pw}
+  </select>
+
+  <select id="getMember"  resultType="MemberDTO">       
+    SELECT *
+    FROM TB_Member
+    WHERE Id = #{id}
+    AND pw = #{pw}
+  </select>
 </mapper>

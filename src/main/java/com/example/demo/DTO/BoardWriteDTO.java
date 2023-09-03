@@ -8,4 +8,5 @@ public class BoardWriteDTO {
     private String title;
     private String content;
     private String writer;
+    private int UserId;
 }

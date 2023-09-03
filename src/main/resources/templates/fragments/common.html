@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:fragment="head(title)">
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"/>
-    
-    <title th:text="${title}">Hello, Spring Boot!</title>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:fragment="menu(menu)">
-      <a class="navbar-brand" href="#">Board</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<head th:fragment="head(title)">
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+
+  <title th:text="${title}">Hello, Spring Boot!</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:fragment="menu(menu)">
+    <a class="navbar-brand" href="#">Board</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <th:block th:if="${name == null}">
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item" th:classappend="${menu} == 'home'? 'active'">
@@ -25,7 +30,7 @@
               <span class="sr-only" th:if="${menu} == 'home'">(current)</span>
             </a>
           </li>
-          
+
           <li class="nav-item" th:classappend="${menu} == 'entr'? 'active'">
             <a class="nav-link" href="#" th:href="@{/board/entr}">
               회원가입
@@ -42,6 +47,37 @@
           </li>
         </ul>
       </div>
-    </nav>
-  </body>
+    </th:block>
+
+    
+    <th:block th:if="${name != null}">
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item" th:classappend="${menu} == 'home'? 'active'">
+            <a class="nav-link" href="#" th:href="@{/}">
+              홈
+              <span class="sr-only" th:if="${menu} == 'home'">(current)</span>
+            </a>
+          </li>
+
+          <li class="nav-item" th:classappend="${menu} == 'entr'? 'active'">
+            <a class="nav-link" href="#" th:href="@{/board/entr}">
+              로그아웃
+              <span class="sr-only" th:if="${menu} == 'entr'">(current)</span>
+            </a>
+          </li>
+
+
+          <li class="nav-item" th:classappend="${menu} == 'board'? 'active'">
+            <a class="nav-link" href="#" th:href="@{/board/list}">
+              게시판
+              <span class="sr-only" th:if="${menu} == 'board'">(current)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </th:block>
+  </nav>
+</body>
+
 </html>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.example.demo.Common;
 import com.example.demo.DTO.BoardSearchAllDTO;
@@ -83,7 +84,14 @@ public class BoardController {
 
 
     @GetMapping("/post")
-    public String write() {
+    public String write(@SessionAttribute(name = "name", required = false)String name, Model model) {
+
+        //세션 (로그인 안했을시) 로그인 후 이용 메세지 출력.
+        if (Common.STRING_NULL_CHECK(name)){
+            MessageDTO message = new MessageDTO(Common.DOLOGIN, "/", null, null);
+            return showMessageAndRedirect(message, model);
+        }
+        model.addAttribute("name", name);
         return "board/write";
     }
 
@@ -93,11 +101,11 @@ public class BoardController {
     // 글을 쓴 뒤 POST 메서드로 글 쓴 내용을 DB에 저장
     // 그 후에는 /list 경로로 리디렉션해준다.    
     @PostMapping("/post")
-    public String write(BoardWriteDTO boardWriteDTO, Model model) {
+    public String write(@SessionAttribute(name = "userId", required = true)int userId ,BoardWriteDTO boardWriteDTO, Model model) {
 
         MessageDTO message;
         
-        if (boardInsertService.save(boardWriteDTO)){
+        if (boardInsertService.save(boardWriteDTO, userId)){
             message = new MessageDTO(Common.SAVESUCCES01, "/board/list", RequestMethod.GET, null);
         }else{
             message = new MessageDTO(Common.FAIL01, "/board/list", RequestMethod.GET, null);

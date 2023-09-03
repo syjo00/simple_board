@@ -11,5 +11,9 @@ public interface MemberMapper {
     //회원가입
     public void entrMember(MemberDTO memberDTO);
 
+    //로그인체크
+    public int logInCheck(MemberDTO memberDTO);
+
+    public MemberDTO getMember(MemberDTO memberDTO);
 
 }

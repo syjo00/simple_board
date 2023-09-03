@@ -14,8 +14,8 @@
     </select>
 
     <insert id="saveBoard">
-      INSERT INTO TB_BOARD(TITLE, CONTENT, WRITER, CREATOR, UPDATER)
-      VALUES(#{title},#{content},#{writer},#{writer},#{writer})
+      INSERT INTO TB_BOARD(TITLE, CONTENT, WRITER, CREATOR)
+      VALUES(#{title},#{content},#{writer},#{userId})
     </insert>
 
   <!-- 게시물 조회 쿼리 -->

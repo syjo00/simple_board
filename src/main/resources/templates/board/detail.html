@@ -1,92 +1,107 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="fragments/common :: head('detail.')">
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"/>
-    <link href="starter-template.css" rel="stylesheet"/>
+<head th:replace="fragments/common :: head('detail.')">
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>detail</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+  <link href="starter-template.css" rel="stylesheet" />
 
-    <style>
-      body {text-align:center; font-size:20px;}
-      div {           
-           margin-top:80px;
-           margin-bottom:30px;
-           }
+  <title>detail</title>
 
-      main>div>thead>h2 {
-        margin-left : 10px;
-      }     
+  <style>
+    body {
+      text-align: center;
+      font-size: 20px;
+    }
+
+    div {
+      margin-top: 80px;
+      margin-bottom: 30px;
+    }
+
+    main>div>thead>h2 {
+      margin-left: 10px;
+    }
   </style>
 
-  </head>
+</head>
 
-  <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu('home')" ></nav>
-    
-    <main role="main" class="container">
-      <div class="starter-template"  style = "margin-top : 180px">
-        <thead>
-          <h2>상세보기</h2>
-        </thead>
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu('home')">
+  </nav>
 
-        <table class ="table table-bordered">          
-          <tbody>
-            <tr>
-              <th>제목</th>
-             
-              <td th:text="${board != null ? board.title : 'No title'}">제목입니다.</td>
-            </tr>
-            <tbody>
-            <tr>
-              <th>작성자</th>
-             
-              <td th:text="${board != null ? board.writer : 'No writer'}">작성자입니다.</td>
-            </tr>
-            <!-- <tr>
+  <main role="main" class="container">
+    <div class="starter-template" style="margin-top : 180px">
+      <thead>
+        <h2>상세보기</h2>
+      </thead>
+
+      <table class="table table-bordered">
+        <tbody>
+          <tr>
+            <th>제목</th>
+
+            <td th:text="${board != null ? board.title : 'No title'}">제목입니다.</td>
+          </tr>
+        <tbody>
+          <tr>
+            <th>작성자</th>
+
+            <td th:text="${board != null ? board.writer : 'No writer'}">작성자입니다.</td>
+          </tr>
+          <!-- <tr>
               <th>작성일</th>
               <td th:inline="text">작성일</td>
             </tr> -->
-            <tr>
-              <th>본문 내용</th>
-              <!-- <td th:text="${boardSearchAllDTO.content}">내용입니다.</td> -->
-              <td th:text="${board != null ? board.content : 'No content'}">본문내용입니다.</td>
-            </tr>
-          </tbody>
-        </table>
+          <tr>
+            <th>본문 내용</th>
+            <!-- <td th:text="${boardSearchAllDTO.content}">내용입니다.</td> -->
+            <td th:text="${board != null ? board.content : 'No content'}">본문내용입니다.</td>
+          </tr>
+        </tbody>
+      </table>
 
-       
-    <div>      
-      <a style="float: right" th:href="@{'/board/edit/update/' + ${board.id}}">
-        <button class="btn btn-primary">수정</button>
-    </a>
-      </a>
 
-        <form id="delete-form" th:action="@{'/board/post/' + ${board.id}}" method="post">          
-            <input type="hidden" name="_method" value="delete"/>
-            <button class="btn btn-warning" id="delete-btn">삭제</button>
+      <div>
+        <th:block th:if="${userId == board.creator}">
+        <a style="float: right" th:href="@{'/board/edit/update/' + ${board.id}}">
+          <button class="btn btn-primary">수정</button>
+        </a>
+        </a>
+
+        <form id="delete-form" th:action="@{'/board/post/' + ${board.id}}" method="post">
+          <input type="hidden" name="_method" value="delete" />
+          <button class="btn btn-warning" id="delete-btn">삭제</button>
         </form>
-    
-     </div> 
-          
-
-     
-    </main>
+        </th:block>
+      </div>
 
 
-    <script>
-      
-      
-    </script>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-  </body>
+  </main>
+
+
+  <script>
+
+
+  </script>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+    integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

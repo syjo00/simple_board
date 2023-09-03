@@ -14,10 +14,11 @@ public class BoardInsertService {
     private BoardMapper boardMapper;
 
     /*
-     * 조회서비스에서 max+1 세팅 후 insert 실행.
+     * 게시글 정보 (제목, 작성자, 게시글)은 화면에서, userId는 세션에서 생성 후 합치고, insert 실행.
      */
-    public boolean save(BoardWriteDTO boardWriteDTO) {
+    public boolean save(BoardWriteDTO boardWriteDTO, int userId) {
 
+        boardWriteDTO.setUserId(userId);
         try {
             boardMapper.saveBoard(boardWriteDTO);
         } catch (Exception e) {

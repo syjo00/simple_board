@@ -10,5 +10,7 @@ public class BoardSearchAllDTO {
     private String content;
     private String writer;
     private String creation_time;
+    private String creator;
     private String update_time;
+    private String updater;
 }
