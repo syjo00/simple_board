@@ -12,7 +12,14 @@ public class BoardDeleteService {
     private BoardMapper boardMapper;
 
 
-    public void delete(String id) {
-        boardMapper.beleteBoard(id);
+    public boolean delete(String id) {
+        try {
+            boardMapper.beleteBoard(id);
+        } catch (Exception e) {
+            // TODO: handle exception
+            return false;
+        }
+
+        return true;
     }
 }

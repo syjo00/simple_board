@@ -16,8 +16,14 @@ public class BoardInsertService {
     /*
      * 조회서비스에서 max+1 세팅 후 insert 실행.
      */
-    public void save(BoardWriteDTO boardWriteDTO) {
+    public boolean save(BoardWriteDTO boardWriteDTO) {
 
-        boardMapper.saveBoard(boardWriteDTO);
+        try {
+            boardMapper.saveBoard(boardWriteDTO);
+        } catch (Exception e) {
+            return false;
+        }
+
+        return true;
     }
 }

@@ -41,12 +41,12 @@
           
         <div class="starter-template">
             <form class="form-horizontal" th:action="@{/board/post/update/{id}}" method="post">   
-              <input type="hidden" name="id" th:value="${board.id}"/>     
+              <input type="hidden" name="id" th:value="${board.id}"/>
               
               <div class="form-group">
                 <label style="float: left" for="title" class="col-sm-2 control-label">제목</label>
                     <div class="col-sm-10" style="margin-top: 10px;">
-                        <input type="title" class="form-control" id="title" name="title" placeholder="제목"/>
+                        <input type="title" class="form-control" id="title" name="title" placeholder="제목" th:value="${board.title}"/>
                 </div>
             </div>
 
@@ -54,7 +54,7 @@
             <div class="form-group">
                 <label style="float: left" for="writer" class="col-sm-2 control-label">작성자</label>
                     <div class="col-sm-10" style="margin-top: 10px;">
-                        <input type="writer" class="form-control" id="writer" name="writer" placeholder="작성자"/>
+                        <input type="writer" class="form-control" id="writer" name="writer" placeholder="작성자" th:value="${board.writer}"/>
                 </div>
             </div>
  
@@ -62,14 +62,14 @@
             <div class="form-group">
               <label style="float: left" for="content" class="col-sm-2 control-label">내용</label>
               <div class="col-sm-10">
-                  <textarea class="form-control" id="content" name="content" placeholder="내용을 입력해 주세요."></textarea>
+                  <textarea class="form-control" id="content" name="content" placeholder="내용을 입력해 주세요." th:field="${board.content}"></textarea>
               </div>
             </div>
 
             
             <div class="box-footer">
               <button type="submit" class="btn btn-primary">저장</button>
-              <button type="submit" class="btn btn-warning">취소</button>
+              <a th:href="@{/board/detail/(id=${board.id})}" class="btn btn-primary">뒤로 가기</a>
             </div>
           </form>
 

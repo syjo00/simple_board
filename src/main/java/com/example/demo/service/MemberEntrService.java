@@ -12,11 +12,18 @@ public class MemberEntrService {
     @Autowired
     private  MemberMapper memberMapper;
 
-    public void entr(MemberDTO memberDTO) {
+    public boolean entr(MemberDTO memberDTO) {
         
         System.out.println("memberDTO - MemberEntrService :" + memberDTO);
+        try {
+            memberMapper.entrMember(memberDTO);
+            
+        } catch (Exception e) {
+            // TODO: handle exception
+            return false;
+        }
 
-         memberMapper.entrMember(memberDTO);
+        return true;
 
     }
   

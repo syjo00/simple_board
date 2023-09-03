@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.Common;
@@ -15,6 +16,7 @@ import com.example.demo.DTO.BoardSearchAllDTO;
 import com.example.demo.DTO.BoardSearchDTO;
 import com.example.demo.DTO.BoardUpdateDTO;
 import com.example.demo.DTO.BoardWriteDTO;
+import com.example.demo.DTO.MessageDTO;
 import com.example.demo.service.BoardDeleteService;
 import com.example.demo.service.BoardDetailService;
 import com.example.demo.service.BoardInsertService;
@@ -90,17 +92,31 @@ public class BoardController {
     // 글을 쓴 뒤 POST 메서드로 글 쓴 내용을 DB에 저장
     // 그 후에는 /list 경로로 리디렉션해준다.    
     @PostMapping("/post")
-    public String write(BoardWriteDTO boardWriteDTO) {
-        boardInsertService.save(boardWriteDTO);
-        return "redirect:/board/list";
+    public String write(BoardWriteDTO boardWriteDTO, Model model) {
+
+        MessageDTO message;
+        
+        if (boardInsertService.save(boardWriteDTO)){
+            message = new MessageDTO(Common.SAVESUCCES01, "/board/list", RequestMethod.GET, null);
+        }else{
+            message = new MessageDTO(Common.FAIL01, "/board/list", RequestMethod.GET, null);
+        }
+        return showMessageAndRedirect(message, model);
     }
 
     // 게시물 삭제는 PostMapping 메서드를 사용하여 간단하게 삭제할 수 있다.
     @PostMapping("/post/{no}")
-    public String delete(@PathVariable("no") String no) {
-        boardDeleteService.delete(no);
+    public String delete(@PathVariable("no") String no, Model model) {
 
-        return "redirect:/board/list";
+        MessageDTO message;
+
+        if (boardDeleteService.delete(no)){
+            message = new MessageDTO(Common.DELETESUCCES01, "/board/list", RequestMethod.GET, null);
+        }else{
+            message = new MessageDTO(Common.FAIL01, "/board/list", RequestMethod.GET, null);
+        }
+
+        return showMessageAndRedirect(message, model);
     }
 
 
@@ -138,22 +154,24 @@ public class BoardController {
     /*정상작동 버전*/
     @PostMapping("/post/update/{id}")
     //public String resave(BoardWriteDTO boardWriteDTO) {
-    public String resave(BoardUpdateDTO boardUpdateDTO) {    
+    public String resave(BoardUpdateDTO boardUpdateDTO, Model model) {    
         
-        System.out.println("==============수정 후 저장 (BoardController.java)==============");
+        MessageDTO message;
 
-        System.out.println("boardUpdateDTO : " +boardUpdateDTO);
-        boardUpdateService.updateBoard(boardUpdateDTO);
-        System.out.println("boardwritedto :" +boardUpdateDTO);
-        return "redirect:/board/list";
+        
+        if (boardUpdateService.updateBoard(boardUpdateDTO)){
+            message = new MessageDTO(Common.UPDATESUCCESEE01, "/board/list", RequestMethod.GET, null);
+        }else{
+            message = new MessageDTO(Common.FAIL01, "/board/list", RequestMethod.GET, null);
+        }
+        
+        return showMessageAndRedirect(message, model);
     }
 
 
 
-    
+    private String showMessageAndRedirect(final MessageDTO params, Model model) {
+        model.addAttribute("params", params);
+        return "fragments/messageRedirect";
+    }
 }
-
-
-
-
-

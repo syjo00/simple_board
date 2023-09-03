@@ -16,9 +16,15 @@ public class BoardUpdateService {
 
     /*정상작동 */
    
-    public void updateBoard(BoardUpdateDTO updatedto) {
+    public boolean updateBoard(BoardUpdateDTO updatedto) {
 
-      boardMapper.updateBoard(updatedto);
+      try {
+        boardMapper.updateBoard(updatedto);
+      } catch (Exception e) {
+        // TODO: handle exception
+        return false;
+      }
+      return true;
     }
 
     
