@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.Common;
 import com.example.demo.DTO.BoardSearchAllDTO;
+import com.example.demo.DTO.BoardSearchDTO;
 import com.example.demo.DTO.BoardUpdateDTO;
 import com.example.demo.DTO.BoardWriteDTO;
 import com.example.demo.service.BoardDeleteService;
@@ -48,10 +50,12 @@ public class BoardController {
         //게시판 전체 조회
         List<BoardSearchAllDTO> boardList;
         Integer[] pageList;
-
+        BoardSearchDTO pageInfo = new BoardSearchDTO(pageNum, searchType, keyword);
+        
+        //페이징.
         pageList = boardSelectService.getPageList(searchType,keyword);
 
-        if(searchType!=null && keyword !=null){
+        if(!Common.STRING_NULL_CHECK(searchType) && !Common.STRING_NULL_CHECK(keyword)){
             //검색결과 조회
             boardList =  boardSelectService.getSearch(searchType,keyword,pageNum);
         }else{         
@@ -61,6 +65,7 @@ public class BoardController {
 
         model.addAttribute("boardList", boardList);
         model.addAttribute("pageList", pageList);
+        model.addAttribute("pageInfo", pageInfo);
 
         return "board/list";
     }

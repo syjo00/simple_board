@@ -53,15 +53,14 @@ public class BoardSelectService {
 
         int allPage;
         BoardSearchDTO boardSearchDTO = new BoardSearchDTO(searchType,keyword);
-
-        // 검색조건, 검색어 둘중 하나라도 null일시 전체건으로 체크
-        if(searchType == null || keyword == null){
-            //전체건 조회
-            allPage = boardMapper.countAllBoard();
+        // 전체, 조회 나누기.
+        if(!Common.STRING_NULL_CHECK(searchType) && !Common.STRING_NULL_CHECK(keyword)){
+            //검색건 조회
+            allPage = boardMapper.countSearchBoard(boardSearchDTO);
         }
         else{
-             // 검색건 조회.
-            allPage = boardMapper.countSearchBoard(boardSearchDTO);
+             //전체건 조회.
+            allPage = boardMapper.countAllBoard();
         }
 
         if((allPage % Common.PAGERECORDSIZE) == 0 ){

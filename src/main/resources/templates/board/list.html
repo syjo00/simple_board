@@ -66,7 +66,7 @@
         
         <div style="margin: 10px">  
           <span th:each="pageNum : ${pageList}" th:inline="text">
-              <a th:href="@{'/board/list/?page=' + ${pageNum}}">[[${pageNum}]]</a>
+              <a th:href="@{'/board/list/?page=' + ${pageNum} + '&searchType=' + ${pageInfo.searchType}+ '&keyword=' + ${pageInfo.keyword}}">[[${pageNum}]]</a>
           </span>          
             <!-- 글쓰기 버튼 -->
             <a style="float: right" class="btn btn-primary" th:href="@{/board/post}">글쓰기</a>
