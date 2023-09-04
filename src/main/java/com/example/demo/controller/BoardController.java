@@ -106,9 +106,9 @@ public class BoardController {
         MessageDTO message;
         System.out.println("boardWriteDTO 출력 : "+boardWriteDTO);
 
-        if(!isBoardDataValid(boardWriteDTO)){
+        if(isBoardDataValid(boardWriteDTO)){
 
-            message = new MessageDTO(Common.BOARDWRITE, "/", RequestMethod.GET, null);
+            message = new MessageDTO(Common.BOARDWRITE, "/board/post", RequestMethod.GET, null);
 
         }else{            
       
@@ -207,6 +207,7 @@ public class BoardController {
     //메세지 출력
     private String showMessageAndRedirect(MessageDTO params, Model model) {
         model.addAttribute("params", params);
+        System.out.println("model 출력:"+ model);
         return "fragments/messageRedirect";
     }
 }

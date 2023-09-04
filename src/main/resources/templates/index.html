@@ -93,9 +93,16 @@
   <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu('home')">
   </nav>
 
+
   <main role="main" class="container">
 
     <div id="container">
+
+      
+  <div th:if="${message}" class="alert alert-success" style="margin-top: 200px;">
+    <span th:text="${message}"></span>
+  </div>
+
       <!--  login 폼 영역을 : loginBox -->
       <div id="loginBox">
 

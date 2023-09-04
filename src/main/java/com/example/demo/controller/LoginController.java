@@ -46,15 +46,22 @@ public class LoginController {
             session.setAttribute("name", sessionMember.getName());
 
             message = new MessageDTO(sessionMember.getName() + " 로그인성공.", "/", RequestMethod.GET,null);
+
+
         }else{
             message = new MessageDTO("로그인실패.", "/", RequestMethod.GET, null);
         }
 
+
         return showMessageAndRedirect(message,model);
     }
 
-        private String showMessageAndRedirect(final MessageDTO params, Model model) {
+    private String showMessageAndRedirect(final MessageDTO params, Model model) {
         model.addAttribute("params", params);
+        model.addAttribute("message", params.getMessage());
+        
+        System.out.println("showMessageAndRedirect + " + model );
+
         return "fragments/messageRedirect";
     }
     

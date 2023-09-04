@@ -33,7 +33,7 @@ public class MemberController {
         
         MessageDTO message;
 
-        if(!isMemberDataValid(MemberDTO)){
+        if(isMemberDataValid(MemberDTO)){
 
             if(memberEntrService.entr(MemberDTO)){
                 message = new MessageDTO(Common.SAVESUCCES01, "/", RequestMethod.GET, null);
@@ -44,7 +44,7 @@ public class MemberController {
 
         }else{
 
-            message = new MessageDTO(Common.MEMBERINFO, "/", RequestMethod.GET, null);
+            message = new MessageDTO(Common.MEMBERINFO, "/board/entr", RequestMethod.GET, null);
             
         }    
         

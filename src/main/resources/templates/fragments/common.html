@@ -24,6 +24,7 @@
     <th:block th:if="${name == null}">
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
+
           <li class="nav-item" th:classappend="${menu} == 'home'? 'active'">
             <a class="nav-link" href="#" th:href="@{/}">
               홈
@@ -38,45 +39,32 @@
             </a>
           </li>
 
-
+          
           <li class="nav-item" th:classappend="${menu} == 'board'? 'active'">
             <a class="nav-link" href="#" th:href="@{/board/list}">
               게시판
               <span class="sr-only" th:if="${menu} == 'board'">(current)</span>
             </a>
           </li>
-        </ul>
-      </div>
-    </th:block>
-
-    
-    <th:block th:if="${name != null}">
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item" th:classappend="${menu} == 'home'? 'active'">
-            <a class="nav-link" href="#" th:href="@{/}">
-              홈
-              <span class="sr-only" th:if="${menu} == 'home'">(current)</span>
-            </a>
-          </li>
-
-          <li class="nav-item" th:classappend="${menu} == 'entr'? 'active'">
-            <a class="nav-link" href="#" th:href="@{/board/entr}">
-              로그아웃
-              <span class="sr-only" th:if="${menu} == 'entr'">(current)</span>
-            </a>
-          </li>
-
 
           <li class="nav-item" th:classappend="${menu} == 'board'? 'active'">
             <a class="nav-link" href="#" th:href="@{/board/list}">
-              게시판
+              
               <span class="sr-only" th:if="${menu} == 'board'">(current)</span>
             </a>
           </li>
+
+
+          <li class="nav-item" th:classappend="${menu} == 'home'? 'active'" style = "float: right;">
+          <form th:action="@{/login}" method="post" >      
+            <button type="submit" class="btn btn-primary">로그아웃 <i class="fa fa-sign-out"></i></button>
+          </form>
+        </li>
+
         </ul>
       </div>
     </th:block>
+
   </nav>
 </body>
 
