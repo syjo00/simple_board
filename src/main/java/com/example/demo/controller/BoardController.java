@@ -104,14 +104,41 @@ public class BoardController {
     public String write(@SessionAttribute(name = "userId", required = true)int userId ,BoardWriteDTO boardWriteDTO, Model model) {
 
         MessageDTO message;
+        System.out.println("boardWriteDTO 출력 : "+boardWriteDTO);
+
+        if(!isBoardDataValid(boardWriteDTO)){
+
+            message = new MessageDTO(Common.BOARDWRITE, "/", RequestMethod.GET, null);
+
+        }else{            
+      
         
-        if (boardInsertService.save(boardWriteDTO, userId)){
-            message = new MessageDTO(Common.SAVESUCCES01, "/board/list", RequestMethod.GET, null);
-        }else{
-            message = new MessageDTO(Common.FAIL01, "/board/list", RequestMethod.GET, null);
-        }
-        return showMessageAndRedirect(message, model);
+            if (boardInsertService.save(boardWriteDTO, userId)){
+
+                message = new MessageDTO(Common.SAVESUCCES01, "/board/list", RequestMethod.GET, null);
+            }else{
+                message = new MessageDTO(Common.FAIL01, "/board/list", RequestMethod.GET, null);
+            }           
+            
+            System.out.println(message);
+        
+        }    
+         
+          return showMessageAndRedirect(message, model);
+
+    }//write();
+
+    
+    private boolean isBoardDataValid(BoardWriteDTO boardWriteDTO) {
+        System.out.println("boardWriteDTO-boolean 출력 : "+boardWriteDTO);             
+        return !(boardWriteDTO.getTitle()==null||
+                boardWriteDTO.getContent()==null                 
+        );
     }
+
+   
+    
+
 
     // 게시물 삭제는 PostMapping 메서드를 사용하여 간단하게 삭제할 수 있다.
     @PostMapping("/post/{no}")
@@ -142,8 +169,7 @@ public class BoardController {
             //id를 기반으로 해당 게시물 정보를 가져와서 수정 화면에 뿌려준다는 가정하에...
             //BoardUpdateDTO boardUpdateDTO = new BoardUpdateDTO(); // 또는 해당 DTO 생성 방식으로 초기화
             //boardSearchAllDTO.setId(id); // DTO에 id 설정
-            System.out.println("==============수정하기1(BoardController.java)==============");
-          
+         
             BoardSearchAllDTO boardDTO = boardDetailService.getBoardById(id);
 
             model.addAttribute("board", boardDTO);     
@@ -178,7 +204,7 @@ public class BoardController {
     }
 
 
-
+    //메세지 출력
     private String showMessageAndRedirect(MessageDTO params, Model model) {
         model.addAttribute("params", params);
         return "fragments/messageRedirect";

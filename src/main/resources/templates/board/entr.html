@@ -31,48 +31,48 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu('entr')"></nav>
 
-         
 
-    <main role="main" style="align :center">
-    
+    <main role="main" >    
   
         <div class="starter-template"  style = "margin-top :350px; margin-left : 800px;">            
                     
-            <form class="form-horizontal" action="#" th:action="@{/board/entr}" method="post">
+            <form class="form-horizontal" action="#" th:action="@{/board/entr}" method="post"  name="check">
                 <h2 style="margin-left : 250px; margin-bottom: 20px;">회원가입</h2> 
    
                 <div class="form-group">                        
                         <div class="col-sm-10" style="margin-top: 20px;">                              
-                        <input style="width : 600px;" type="name" id="name" name = "name" placeholder="이름을 입력하세요 ex) Angelina Jolie" class="form-control" autocomplete="name" />                             
+                        <input style="width : 600px;" type="text" id="name" name = "name" placeholder="이름을 입력하세요 ex) Angelina Jolie" class="form-control" autocomplete="name" />                             
                     </div>
                 </div>    
     
             
                 <div class="form-group">
                         <div class="col-sm-10" style="margin-top: 20px;">
-                            <input style="width : 600px; " type="id" id="id" name="id" placeholder="아이디를 입력하세요" class="form-control"  autocomplete="id"/>                            
+                            <input style="width : 600px; " type="text" id="id" name="id" placeholder="아이디를 입력하세요" class="form-control"  autocomplete="id"/>                            
                     </div>
                 </div>
     
                 
                 <div class="form-group">                        
                         <div class="col-sm-10" style="margin-top: 20px;">                                         
-                            <input style="width : 600px; " type="pw" class="form-control" id="pw" name="pw" placeholder=" 비밀번호를 입력하세요 ex) ********"/>
+                            <input style="width : 600px; " type="text" class="form-control" id="pw" name="pw" placeholder=" 비밀번호를 입력하세요 ex) ********"/>
                     </div>
                 </div>
     
                 <div class="form-group">                    
                     <div class="col-sm-10" style="margin-top: 20px;">                                    
-                        <input style="width : 600px; " type="pw2" class="form-control" id="pw2" name="pw2" placeholder="비밀번호를 한번 더 입력하세요"/>
+                        <input style="width : 600px; " type="text" class="form-control" id="pw2" name="pw2" placeholder="비밀번호를 한번 더 입력하세요"/>
                         <label id="pwConfirm"></label> 
                     </div>
                 </div>
 
                 <div class="form-group">                       
                         <div class="col-sm-10" style="margin-top: 20px;">                                                            
-                            <input style="width : 600px;" type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요 ex)genius@naver.com" autocomplete="email"/>
+                            <input style="width : 600px;" type="text" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요 ex)genius@naver.com" autocomplete="email"/>
                     </div>
                 </div>
+
+
                 
                 <button 
                     type="button" 
@@ -91,6 +91,10 @@
                     </button>
                 </div>
                 
+                <div class="alert alert-danger" th:if="${alertMessage}">
+                    <p th:text="${alertMessage}"></p>
+                </div>
+
                
             </form>
           
@@ -101,37 +105,10 @@
       
 </body>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script>
+<script th:inline="javascript">
 
 
-$("#id,#name,#email").click(function(){
 
-let id = $("#id").val();
-let name = $("#name").val();
-let email = $("#email").val();
-
-if(id ===null || name===null || email ===null){
-    $("#EntrBtn").prop("disabled", true);
-        return false;           
-} else {
-    $("#EntrBtn").prop("disabled", false);
-}
-
-
-}); 
-
-/* 참고
-  $("input[name=name2]").click(function (e) {
-        var result = $("input[name=name1]").val();
-        if (!result) {
-            alert("내용을 입력하십시오");
-            $('#id').text('*입력해주세요');
-            $('#id').css('color', 'red');
-        }
-    })
-
-
-*/
 
 
 
@@ -156,12 +133,7 @@ if(id ===null || name===null || email ===null){
         }
 
         });
-
-        // function entr(){
-          
-        //         alert("가입이 완료되었습니다.");            
-                
-        // }
+    
 
         function ContPopUp(){
 
@@ -171,8 +143,6 @@ if(id ===null || name===null || email ===null){
             window.open(url, name, option);
 
         }
-
-      
 
      
 </script>
