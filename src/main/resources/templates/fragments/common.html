@@ -48,18 +48,17 @@
           </li>
 
           <li class="nav-item" th:classappend="${menu} == 'board'? 'active'">
-            <a class="nav-link" href="#" th:href="@{/board/list}">
-              
+            <a class="nav-link" href="#" th:href="@{/board/list}">              
               <span class="sr-only" th:if="${menu} == 'board'">(current)</span>
             </a>
           </li>
 
 
           <li class="nav-item" th:classappend="${menu} == 'home'? 'active'" style = "float: right;">
-          <form th:action="@{/login}" method="post" >      
-            <button type="submit" class="btn btn-primary">로그아웃 <i class="fa fa-sign-out"></i></button>
-          </form>
-        </li>
+            <form th:action="@{/logout}" method="post" >      
+              <button type="submit" class="btn btn-primary">로그아웃 <i class="fa fa-sign-out"></i></button>
+            </form>
+          </li>
 
         </ul>
       </div>

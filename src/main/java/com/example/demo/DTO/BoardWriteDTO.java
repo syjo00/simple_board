@@ -9,4 +9,6 @@ public class BoardWriteDTO {
     private String content;
     private String writer;
     private int UserId;
+    private String creation_time;
+    private String update_time;
 }

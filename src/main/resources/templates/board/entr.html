@@ -19,9 +19,11 @@
     </script>
 
     <style>
-    body {
-        text-align:center; 
-        font-size:20px;              
+
+   
+    .starter-template {
+        align:center; 
+        font-size:20px;  
     }
 
 
@@ -32,12 +34,12 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu('entr')"></nav>
 
 
-    <main role="main" >    
-  
-        <div class="starter-template"  style = "margin-top :350px; margin-left : 800px;">            
+    <main role="main" style="margin-top : 400px; margin-left : 950px;">    
+        
+        <div class="starter-template">            
                     
             <form class="form-horizontal" action="#" th:action="@{/board/entr}" method="post"  name="check">
-                <h2 style="margin-left : 250px; margin-bottom: 20px;">회원가입</h2> 
+                <h2 style="margin-left : 20px;">회원가입</h2> 
    
                 <div class="form-group">                        
                         <div class="col-sm-10" style="margin-top: 20px;">                              
@@ -72,16 +74,15 @@
                     </div>
                 </div>
 
-
-                
+              <!--   
                 <button 
                     type="button" 
                     class="btn btn-primary" 
                     data-toggle="modal" 
                     data-target="#exampleModal" 
                     onclick ="ContPopUp()"
-                    style ="width :100px; margin-left :350px; position:fixed;">약관동의</button>
-                
+                    style ="width :100px; margin-left :350px; position:fixed;">약관동의</button> -->
+                 
 
                 <div class="form-group" id="entrBtn">
                    
@@ -89,13 +90,8 @@
                             style ="width :100px; margin-left :500px; position:fixed; "
                             aria-describedby="submitHelp" onclick ="entr()">가입하기
                     </button>
-                </div>
-                
-                <div class="alert alert-danger" th:if="${alertMessage}">
-                    <p th:text="${alertMessage}"></p>
-                </div>
-
-               
+                </div>               
+            
             </form>
           
          

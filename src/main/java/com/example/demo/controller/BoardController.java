@@ -106,20 +106,19 @@ public class BoardController {
         MessageDTO message;
         System.out.println("boardWriteDTO 출력 : "+boardWriteDTO);
 
-        if(isBoardDataValid(boardWriteDTO)){
+        if(!isBoardDataValid(boardWriteDTO)){
 
-            message = new MessageDTO(Common.BOARDWRITE, "/board/post", RequestMethod.GET, null);
-
-        }else{            
-      
-        
             if (boardInsertService.save(boardWriteDTO, userId)){
 
                 message = new MessageDTO(Common.SAVESUCCES01, "/board/list", RequestMethod.GET, null);
             }else{
                 message = new MessageDTO(Common.FAIL01, "/board/list", RequestMethod.GET, null);
-            }           
+            }   
             
+        }else{                  
+               
+            message = new MessageDTO(Common.BOARDWRITE, "/board/post", RequestMethod.GET, null);
+
             System.out.println(message);
         
         }    
@@ -131,8 +130,9 @@ public class BoardController {
     
     private boolean isBoardDataValid(BoardWriteDTO boardWriteDTO) {
         System.out.println("boardWriteDTO-boolean 출력 : "+boardWriteDTO);             
-        return !(boardWriteDTO.getTitle()==null||
-                boardWriteDTO.getContent()==null                 
+        return (boardWriteDTO.getTitle()=="" ||
+                boardWriteDTO.getContent()==""||
+                boardWriteDTO.getContent()==""
         );
     }
 

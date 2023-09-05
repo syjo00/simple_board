@@ -33,7 +33,7 @@ public class MemberController {
         
         MessageDTO message;
 
-        if(isMemberDataValid(MemberDTO)){
+        if(!isMemberDataValid(MemberDTO)){
 
             if(memberEntrService.entr(MemberDTO)){
                 message = new MessageDTO(Common.SAVESUCCES01, "/", RequestMethod.GET, null);
@@ -54,15 +54,10 @@ public class MemberController {
 
         private boolean isMemberDataValid(MemberDTO memberDTO) {
 
-            return !(
+            return (
                 memberDTO.getName()=="" ||
                 memberDTO.getPw()=="" ||
-                memberDTO.getEmail()=="" ||
-                memberDTO.getMember_no()=="" ||
-                memberDTO.getUpdater() == null ||
-                memberDTO.getCreator() == null ||
-                memberDTO.getUpdater() == null ||
-                memberDTO.getUpdate_time() == null
+                memberDTO.getEmail()==""                
             );
 
         }
