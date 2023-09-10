@@ -117,7 +117,7 @@ public class BoardController {
             
         }else{                  
                
-            message = new MessageDTO(Common.BOARDWRITE, "/board/post", RequestMethod.GET, null);
+            message = new MessageDTO(Common.BOARDWRITE, "/board/post", RequestMethod.POST, null);
 
             System.out.println(message);
         

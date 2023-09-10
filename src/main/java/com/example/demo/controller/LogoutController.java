@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.example.demo.DTO.MemberDTO;
+
 import com.example.demo.DTO.MessageDTO;
 import com.example.demo.service.LoginService;
 

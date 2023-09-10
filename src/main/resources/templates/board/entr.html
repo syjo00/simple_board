@@ -57,20 +57,21 @@
                 
                 <div class="form-group">                        
                         <div class="col-sm-10" style="margin-top: 20px;">                                         
-                            <input style="width : 600px; " type="text" class="form-control" id="pw" name="pw" placeholder=" 비밀번호를 입력하세요 ex) ********"/>
+                            <input style="width : 600px; " type="password" class="form-control" id="pw" name="pw" placeholder=" 비밀번호를 입력하세요 ex) ********"/>
+                            <label id="pwPsbl"></label> 
                     </div>
                 </div>
     
                 <div class="form-group">                    
                     <div class="col-sm-10" style="margin-top: 20px;">                                    
-                        <input style="width : 600px; " type="text" class="form-control" id="pw2" name="pw2" placeholder="비밀번호를 한번 더 입력하세요"/>
+                        <input style="width : 600px; " type="password" class="form-control" id="pw2" name="pw2" placeholder="비밀번호를 한번 더 입력하세요"/>
                         <label id="pwConfirm"></label> 
                     </div>
                 </div>
 
                 <div class="form-group">                       
                         <div class="col-sm-10" style="margin-top: 20px;">                                                            
-                            <input style="width : 600px;" type="text" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요 ex)genius@naver.com" autocomplete="email"/>
+                            <input style="width : 600px;" type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요 ex)genius@naver.com" autocomplete="email"/>
                     </div>
                 </div>
 
@@ -103,30 +104,46 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script th:inline="javascript">
 
-
-
-
-
-
         $("#pw,#pw2").keyup(function(){
 
-        let p1 = $("#pw").val();
-        let p2 = $("#pw2").val();
+            let p1 = $("#pw").val();
+            let p2 = $("#pw2").val();
+            
 
-        if(p1 =='' && p2==''){
-            $("#pwConfirm").text("");
-            return;
-        }
+            //숫자
+            var pattern1 = /0-9/;
 
-        if(p1 == p2){
-            $("#pwConfirm").text("비밀번호 일치").css('color','#00FF00');
-            $("#EntrBtn").prop("disabled", false);
-            return;
-        } else {
-            $("#pwConfirm").text("비밀번호 불일치").css('color','#be0000');
-            $("#EntrBtn").prop("disabled", true);
-            return false;
-        }
+            //문자
+            var pattern2 = /a-zA-Z/;
+
+            //특수문자
+            var pattern3 = /[~!@#$%^&*()_+|<>?:{}]/;
+
+            if(p1 =='' && p2==''){
+                $("#pwConfirm").text("");
+                return;
+            }
+
+
+            if (pattern1.test(p1) || pattern2.test(p1) || !pattern3.test(p1) || p1.length < 8) {
+                $("#pwPsbl").text("비밀번호는 영문자,숫자,특수문자를 포함한 8자 이상이어야 합니다.").css('color', '#be0000');    
+                $("#EntrBtn").prop("disabled", false);         
+            }else{
+                $("#pwPsbl").text("사용가능한 비밀번호").css('color', '#6B9900');
+                $("#EntrBtn").prop("disabled", true);
+            }
+        
+            
+            if(p1 == p2){
+                $("#pwConfirm").text("비밀번호 일치").css('color','#6B9900');
+                $("#EntrBtn").prop("disabled", false);
+                return;
+            } else {
+                $("#pwConfirm").text("비밀번호 불일치").css('color','#be0000');
+                $("#EntrBtn").prop("disabled", true);
+                return false;
+            }           
+          
 
         });
     
