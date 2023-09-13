@@ -16,8 +16,15 @@ public class MemberEntrService {
         
         System.out.println("memberDTO - MemberEntrService :" + memberDTO);
         try {
+
+            // 동일 id 있을시 오류 발생.
+            if (memberMapper.entrCheck(memberDTO) > 1){
+                throw new RuntimeException("아이디중복");
+            };
+
             memberMapper.entrMember(memberDTO);
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
+            e.printStackTrace();
             return false;
         }
         return true;

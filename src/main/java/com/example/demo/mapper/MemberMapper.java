@@ -16,4 +16,7 @@ public interface MemberMapper {
 
     public MemberDTO getMember(MemberDTO memberDTO);
 
+    //회원가입체크.
+    public int entrCheck(MemberDTO memberDTO);
+
 }

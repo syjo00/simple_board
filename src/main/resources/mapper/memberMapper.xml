@@ -12,6 +12,12 @@
     VALUES(#{id},#{pw},#{name},#{email},now(),#{id},#{update_time},#{updater})
    </insert>
 
+  <select id="entrCheck"  resultType="int">       
+    SELECT COUNT(*)
+    FROM TB_Member
+    WHERE Id = #{id}
+  </select>
+
   <select id="logInCheck"  resultType="int">       
     SELECT COUNT(*)
     FROM TB_Member

@@ -39,6 +39,7 @@ public class MemberController {
                 message = new MessageDTO(Common.SAVESUCCES01, "/", RequestMethod.GET, null);
             }
             else{
+                
                 message = new MessageDTO(Common.FAIL01, "/", RequestMethod.GET, null);
             }            
 
