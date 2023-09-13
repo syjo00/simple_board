@@ -21,6 +21,16 @@
              margin-top:40px;
              margin-bottom:30px;
              }
+
+        .custom-file{
+          float : right;
+          margin-right : 200px;
+          width : 350px;
+          margin-bottom : 100px;
+        }    
+         
+    
+
     </style>
 
     <title>게시판입니다.</title>
@@ -34,7 +44,8 @@
         <h1>게시글 등록</h1>
       </div>
       <div class="starter-template">
-           <form class="form-horizontal" th:action="@{/board/post}" method="post">
+           
+        <form id ="fileUploadForm" class="form-horizontal" th:action="@{/board/post}" method="post"  enctype="multipart/form-data">
                 <div class="form-group">
                     <label style="float: left" for="title" class="col-sm-2 control-label">제목</label>
                         <div class="col-sm-10" style="margin-top: 10px;">
@@ -56,13 +67,50 @@
                </div>
             </div>
 
-            <div class="btn_wrap text-center">
-               <a th:href="@{/board/list}" class="btn btn-secondary">뒤로 가기</a>
-               <button type="input" class="btn btn-primary waves-effect waves-light">저장 하기</button>
+          
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile"  name="file">
+                <label class="custom-file-label" for="customFile">파일선택</label>
             </div>
-           </form>
+          
+        
+            <div class="btn_wrap text-center" style="margin-top : 80px;">
+              <a th:href="@{/board/list}" class="btn btn-secondary">뒤로 가기</a>
+              <button type="input" class="btn btn-primary waves-effect waves-light">저장 하기</button>
+            </div>
+
+        </form>
+
       </div>
     </main>
+
+    <script>
+        $(document).ready(function () {
+            $("#fileUploadForm").submit(function (e) {
+                e.preventDefault();
+                var formData = new FormData($(this)[0]); //<form> 엘리먼트를 jQuery 객체로 선택하고, [0]을 사용하여 해당 엘리먼트의 DOM 요소로 접근
+
+                $.ajax({
+                    url: "/board/post",
+                    type: "POST",
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (data) {
+                        // 파일 업로드 성공 시 실행할 작업을 여기에 추가
+                        console.log("파일 업로드 성공");
+                        // 성공 페이지로 리다이렉트 또는 다른 작업을 수행
+                    },
+                    error: function () {
+                        // 파일 업로드 실패 시 실행할 작업을 여기에 추가
+                        console.log("파일 업로드 실패");
+                    }
+                });
+            });
+        });
+
+    </script>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

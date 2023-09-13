@@ -127,24 +127,24 @@
 
             if (pattern1.test(p1) || pattern2.test(p1) || !pattern3.test(p1) || p1.length < 8) {
                 $("#pwPsbl").text("비밀번호는 영문자,숫자,특수문자를 포함한 8자 이상이어야 합니다.").css('color', '#be0000');    
-                $("#EntrBtn").prop("disabled", false);         
+                $("#EntrBtn").prop("disabled", true);         
             }else{
                 $("#pwPsbl").text("사용가능한 비밀번호").css('color', '#6B9900');
-                $("#EntrBtn").prop("disabled", true);
-            }
-        
-            
-            if(p1 == p2){
+
+                if(p1 == p2){
                 $("#pwConfirm").text("비밀번호 일치").css('color','#6B9900');
                 $("#EntrBtn").prop("disabled", false);
                 return;
-            } else {
-                $("#pwConfirm").text("비밀번호 불일치").css('color','#be0000');
-                $("#EntrBtn").prop("disabled", true);
-                return false;
-            }           
-          
+                } else {
+                    $("#pwConfirm").text("비밀번호 불일치").css('color','#be0000');
+                    $("#EntrBtn").prop("disabled", true);
+                    return false;
+                } 
 
+
+                $("#EntrBtn").prop("disabled", false);
+            }
+        
         });
     
 
