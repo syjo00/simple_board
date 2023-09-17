@@ -102,7 +102,7 @@ public class BoardController {
     // 글을 쓴 뒤 POST 메서드로 글 쓴 내용을 DB에 저장
     // 그 후에는 /list 경로로 리디렉션해준다.    
     @PostMapping("/post")
-    public String write(@SessionAttribute(name = "userId", required = true)int userId ,BoardWriteDTO boardWriteDTO, Model model) {
+    public String write(@SessionAttribute(name = "userId", required = true)String userId ,BoardWriteDTO boardWriteDTO, Model model) {
 
         MessageDTO message;
         System.out.println("boardWriteDTO 출력 : "+boardWriteDTO);

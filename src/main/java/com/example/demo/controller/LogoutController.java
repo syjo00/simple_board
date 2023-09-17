@@ -32,7 +32,7 @@ public class LogoutController {
             session.invalidate();
         }
 
-        message = new MessageDTO(" 로그아웃되었습니다.", "/", RequestMethod.GET, null);
+        message = new MessageDTO(" 로그아웃되었습니다.", "/board", RequestMethod.GET, null);
 
         System.out.println("로그아웃 메세지 message :" + message);
 

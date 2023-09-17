@@ -69,7 +69,7 @@
     margin-right: 30px;
     margin-bottom: 20px;
     background: linear-gradient(to right, #090b27, #8aafe7);
-     -webkit-background-clip: text; 
+    -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
@@ -98,10 +98,10 @@
 
     <div id="container">
 
-      
-  <div th:if="${message}" class="alert alert-success" style="margin-top: 200px;">
-    <span th:text="${message}"></span>
-  </div>
+
+      <div th:if="${message}" class="alert alert-success" style="margin-top: 200px;">
+        <span th:text="${message}"></span>
+      </div>
 
       <!--  login 폼 영역을 : loginBox -->
       <div id="loginBox">
@@ -118,8 +118,8 @@
               <div class="input-form-box"><span>아이디 </span><input type="text" name="id" placeholder="아이디를 입력해 주세요"
                   class="form-control" style="margin-top : 15px; width : 400px;"></div>
 
-              <div class="input-form-box"><span>비밀번호 </span><input type="password" name="pw"
-                  placeholder="비밀번호를 입력해 주세요" class="form-control" style="margin-top : 15px; width : 400px;"></div>
+              <div class="input-form-box"><span>비밀번호 </span><input type="password" name="pw" placeholder="비밀번호를 입력해 주세요"
+                  class="form-control" style="margin-top : 15px; width : 400px;"></div>
 
 
               <div class="button-login-box">
@@ -136,12 +136,11 @@
 
         </fieldset>
 
-                  <!-- 네이버 로그인 버튼 노출 영역 -->
-          <div id="naver_id_login"></div>
-          <!-- //네이버 로그인 버튼 노출 영역 -->
-          <div th:if="${session.currentUser eq null}">
-            <a th:href="${apiURL}"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG" /></a>
-          </div>
+        <!-- 이미 세션 존재하면 버튼 비노출.-->
+        <div th:if="${session.userId eq null}">
+           <!-- 네이버 로그인 버튼 노출 영역 -->
+          <a th:href="${naverApiURL}"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG" /></a>
+        </div>
       </div>
     </div>
 
