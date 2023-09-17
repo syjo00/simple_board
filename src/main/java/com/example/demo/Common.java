@@ -17,6 +17,10 @@ public class Common {
     public static final String BOARDWRITE = "게시글 내용을 모두 입력하세요";
     
 
+
+    // 네이버 api 계정.
+    public static String NAVER_CLIENT_ID = "4mJ7gqISlayBgvXf6RnU"; // 애플리케이션 클라이언트 아이디값";
+    public static String NAVER_CLIENT_SECRET = "ZRLcefd8hi"; // 애플리케이션 클라이언트 시크릿값";
  
     /*
      * 스트링 타입 널 체크! 가끔씩 화면에서 찐 null이 아닌 문자 "null"을 보내주는 경우가 있음.

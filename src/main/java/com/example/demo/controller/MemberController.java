@@ -16,15 +16,16 @@ import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("board")
+@RequestMapping("entr")
 public class MemberController {
 
    private MemberEntrService memberEntrService;
+   BasicContoller basicContoller;
    
 
     @GetMapping({"/entr"})
      public String entr() {
-         return "board/entr";
+         return "entr/entr";
     }
 
     
@@ -45,11 +46,11 @@ public class MemberController {
 
         }else{
 
-            message = new MessageDTO(Common.MEMBERINFO, "/board/entr", RequestMethod.GET, null);
+            message = new MessageDTO(Common.MEMBERINFO, "/entr/entr", RequestMethod.GET, null);
             
         }    
         
-            return showMessageAndRedirect(message, model);
+            return basicContoller.showMessageAndRedirect(message, model);
 
     }//write(); 
 
@@ -62,15 +63,6 @@ public class MemberController {
             );
 
         }
-
-
-
-    //메시지 출력용 화면.
-    private String showMessageAndRedirect(final MessageDTO params, Model model) {
-        model.addAttribute("params", params);
-        return "fragments/messageRedirect";
-    }
-    
 }//Controller
 
     

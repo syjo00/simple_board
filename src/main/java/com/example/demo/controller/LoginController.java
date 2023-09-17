@@ -19,7 +19,9 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping("login")
 public class LoginController {
+
     LoginService loginService;
+    BasicContoller basicContoller;
 
     /*
      * 로그인 실행 컨트롤러
@@ -53,16 +55,6 @@ public class LoginController {
         }
 
 
-        return showMessageAndRedirect(message,model);
+        return basicContoller.showMessageAndRedirect(message,model);
     }
-
-    private String showMessageAndRedirect(final MessageDTO params, Model model) {
-        model.addAttribute("params", params);
-        model.addAttribute("message", params.getMessage());
-        
-        System.out.println("showMessageAndRedirect + " + model );
-
-        return "fragments/messageRedirect";
-    }
-    
 }

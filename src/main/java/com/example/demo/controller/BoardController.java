@@ -38,6 +38,7 @@ public class BoardController {
     private BoardDeleteService boardDeleteService;
     private BoardDetailService boardDetailService;
     private BoardUpdateService boardUpdateService;
+    private BasicContoller basicContoller;
 
     // 게시판
 
@@ -89,7 +90,7 @@ public class BoardController {
         //세션 (로그인 안했을시) 로그인 후 이용 메세지 출력.
         if (Common.STRING_NULL_CHECK(name)){
             MessageDTO message = new MessageDTO(Common.DOLOGIN, "/", null, null);
-            return showMessageAndRedirect(message, model);
+            return basicContoller.showMessageAndRedirect(message, model);
         }
         model.addAttribute("name", name);
         return "board/write";
@@ -123,7 +124,7 @@ public class BoardController {
         
         }    
          
-          return showMessageAndRedirect(message, model);
+          return basicContoller.showMessageAndRedirect(message, model);
 
     }//write();
 
@@ -152,7 +153,7 @@ public class BoardController {
             message = new MessageDTO(Common.FAIL01, "/board/list", RequestMethod.GET, null);
         }
 
-        return showMessageAndRedirect(message, model);
+        return basicContoller.showMessageAndRedirect(message, model);
     }
 
 
@@ -200,14 +201,23 @@ public class BoardController {
             message = new MessageDTO(Common.FAIL01, "/board/list", RequestMethod.GET, null);
         }
         
-        return showMessageAndRedirect(message, model);
+        return basicContoller.showMessageAndRedirect(message, model);
     }
 
+    @GetMapping("/detail")
+    public String viewBoardDetail(@SessionAttribute(name = "userId", required = false) String userId,
+            @RequestParam("id") String id, Model model) throws Exception {
 
-    //메세지 출력
-    private String showMessageAndRedirect(MessageDTO params, Model model) {
-        model.addAttribute("params", params);
-        System.out.println("model 출력:"+ model);
-        return "fragments/messageRedirect";
+        System.out.println("=====================DetailController.java<상세보기>=======================");
+        BoardSearchAllDTO boardDTO = boardDetailService.getBoardById(id);
+
+        model.addAttribute("board", boardDTO);
+        // board라는 이름으로 boardDTO 객체를 모델에 추가함.
+        model.addAttribute("userId", userId);
+
+        System.out.println("model:" + model);
+        System.out.println("======================DetailController.java<상세보기 끝> =====================");
+        return "board/detail";
     }
+
 }
