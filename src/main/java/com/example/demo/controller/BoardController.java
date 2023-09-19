@@ -46,6 +46,7 @@ public class BoardController {
     private BoardDeleteService boardDeleteService;
     private BoardDetailService boardDetailService;
     private BoardUpdateService boardUpdateService;
+    private BasicContoller basicContoller;
 
     // 게시판
 
@@ -170,7 +171,7 @@ public class BoardController {
 
         } // end for
 
-        return showMessageAndRedirect(message, model);
+        return basicContoller.showMessageAndRedirect(message, model);
 
     }// write();
 
@@ -193,7 +194,7 @@ public class BoardController {
             message = new MessageDTO(Common.FAIL01, "/board/list", RequestMethod.GET, null);
         }
 
-        return showMessageAndRedirect(message, model);
+        return basicContoller.showMessageAndRedirect(message, model);
     }
 
     /* 정상작동 */
@@ -233,7 +234,7 @@ public class BoardController {
             message = new MessageDTO(Common.FAIL01, "/board/list", RequestMethod.GET, null);
         }
 
-        return showMessageAndRedirect(message, model);
+        return basicContoller.showMessageAndRedirect(message, model);
     }
 
     @GetMapping("/detail")
@@ -252,10 +253,4 @@ public class BoardController {
         return "board/detail";
     }
 
-    // 메세지 출력
-    private String showMessageAndRedirect(MessageDTO params, Model model) {
-        model.addAttribute("params", params);
-        System.out.println("model 출력:" + model);
-        return "fragments/messageRedirect";
-    }
 }
