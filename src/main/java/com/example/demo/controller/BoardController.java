@@ -98,7 +98,7 @@ public class BoardController {
         // 세션 (로그인 안했을시) 로그인 후 이용 메세지 출력.
         if (Common.STRING_NULL_CHECK(name)) {
             MessageDTO message = new MessageDTO(Common.DOLOGIN, "/", null, null);
-            return showMessageAndRedirect(message, model);
+            return basicContoller.showMessageAndRedirect(message, model);
         }
         model.addAttribute("name", name);
         return "board/write";
