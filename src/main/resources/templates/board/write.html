@@ -37,7 +37,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu('board')" ></nav>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu('board')"></nav>
 
     <main class="container">
       <div class="page-header"  style="margin-top : 450px">
@@ -67,47 +67,64 @@
                </div>
             </div>
 
-          
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" id="customFile"  name="file">
-                <label class="custom-file-label" for="customFile">파일선택</label>
+            <div class="form-group">              
+              <input type="file" id="uploadFile" name="uploadFile" multiple>              
             </div>
-          
-        
+
             <div class="btn_wrap text-center" style="margin-top : 80px;">
               <a th:href="@{/board/list}" class="btn btn-secondary">뒤로 가기</a>
               <button type="input" class="btn btn-primary waves-effect waves-light">저장 하기</button>
             </div>
+      
+          </form>
 
-        </form>
+            
+      
 
       </div>
     </main>
 
-    <script>
-        $(document).ready(function () {
-            $("#fileUploadForm").submit(function (e) {
-                e.preventDefault();
-                var formData = new FormData($(this)[0]); //<form> 엘리먼트를 jQuery 객체로 선택하고, [0]을 사용하여 해당 엘리먼트의 DOM 요소로 접근
 
-                $.ajax({
-                    url: "/board/post",
-                    type: "POST",
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (data) {
-                        // 파일 업로드 성공 시 실행할 작업을 여기에 추가
-                        console.log("파일 업로드 성공");
-                        // 성공 페이지로 리다이렉트 또는 다른 작업을 수행
-                    },
-                    error: function () {
-                        // 파일 업로드 실패 시 실행할 작업을 여기에 추가
-                        console.log("파일 업로드 실패");
-                    }
-                });
-            });
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+
+    <script>
+
+      $(document).ready(function(){
+
+        $("#uploadBtn").on("click",function(e){
+
+          var FormData = new FormData();
+          var inputFile = $("input[name='uploadFile']");
+          var files = inputFile[0].files;
+
+          console.log(files);
+
+          //add File Data to formData
+          for(var i=0;i<files.length;i++){
+              formData.append("uploadFiles",files[i]);
+
+          }
+
+          $.ajax({
+
+            url:'/post',
+            processData : false,
+            contentType : false,
+            data: formData,
+            type : 'POST',
+            success :function(result){
+                alert("Uploaded");
+            }
+
+          });
+
+
         });
+
+      });
+
+
 
     </script>
 

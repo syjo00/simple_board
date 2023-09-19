@@ -1,7 +1,14 @@
 package com.example.demo.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.Common;
+import com.example.demo.DTO.BoardFileDTO;
 import com.example.demo.DTO.BoardSearchAllDTO;
 import com.example.demo.DTO.BoardSearchDTO;
 import com.example.demo.DTO.BoardUpdateDTO;
@@ -24,6 +33,7 @@ import com.example.demo.service.BoardDetailService;
 import com.example.demo.service.BoardInsertService;
 import com.example.demo.service.BoardSelectService;
 import com.example.demo.service.BoardUpdateService;
+import com.example.demo.service.FileUploadService;
 
 import lombok.AllArgsConstructor;
 
@@ -38,7 +48,6 @@ public class BoardController {
     private BoardDeleteService boardDeleteService;
     private BoardDetailService boardDetailService;
     private BoardUpdateService boardUpdateService;
-    private BasicContoller basicContoller;
 
     // 게시판
 
@@ -90,7 +99,7 @@ public class BoardController {
         //세션 (로그인 안했을시) 로그인 후 이용 메세지 출력.
         if (Common.STRING_NULL_CHECK(name)){
             MessageDTO message = new MessageDTO(Common.DOLOGIN, "/", null, null);
-            return basicContoller.showMessageAndRedirect(message, model);
+            return showMessageAndRedirect(message, model);
         }
         model.addAttribute("name", name);
         return "board/write";
@@ -102,7 +111,11 @@ public class BoardController {
     // 글을 쓴 뒤 POST 메서드로 글 쓴 내용을 DB에 저장
     // 그 후에는 /list 경로로 리디렉션해준다.    
     @PostMapping("/post")
-    public String write(@SessionAttribute(name = "userId", required = true)String userId ,BoardWriteDTO boardWriteDTO, Model model) {
+    public String write(@SessionAttribute(name = "userId", required = true)int userId ,
+                        @RequestParam("uploadFile") List<MultipartFile> uploadFile,                         
+                        BoardWriteDTO boardWriteDTO,
+                        BoardFileDTO boardFileDTO,
+                        Model model) {
 
         MessageDTO message;
         System.out.println("boardWriteDTO 출력 : "+boardWriteDTO);
@@ -122,11 +135,62 @@ public class BoardController {
 
             System.out.println(message);
         
-        }    
+        }   
+        
+        //파일저장       
+        
+        UUID uuID = UUID.randomUUID();
+
+        String uuid = uuID.toString();
+        
+
+        System.out.println("uuid : " + uuid);
+
+        String uploadFolder = "C:\\my_directory"; // 생성할 폴더 경로
+        
+        Path directory = Paths.get(uploadFolder);
+
+
+       
+
+                for(MultipartFile multipartFile : uploadFile){
+                     File saveFile = new File(uploadFolder, multipartFile.getOriginalFilename());
+
+                     String filename = saveFile.getAbsolutePath();
+
+                     FileUploadService.fileupload(boardFileDTO, boardWriteDTO,  uploadFile,  uuid,filename);
+
+                 
+
+                    try {
+
+                            // 폴더가 존재하지 않으면 생성
+                            if (!Files.exists(directory)) {
+                                Files.createDirectories(directory);
+                                multipartFile.transferTo(saveFile);
+
+                                System.out.println("폴더가 생성되었습니다.");
+                            } else {
+                                System.out.println("폴더가 이미 존재합니다.");
+                                multipartFile.transferTo(saveFile);
+                            }
+
+                    } catch (IOException e) {
+                        System.err.println("폴더 생성 실패: " + e.getMessage());
+                    }
+
+
+                }//end for
+            
+       
          
-          return basicContoller.showMessageAndRedirect(message, model);
+          return showMessageAndRedirect(message, model);
 
     }//write();
+
+
+   
+
 
     
     private boolean isBoardDataValid(BoardWriteDTO boardWriteDTO) {
@@ -137,6 +201,7 @@ public class BoardController {
         );
     }
 
+   
    
     
 
@@ -153,7 +218,7 @@ public class BoardController {
             message = new MessageDTO(Common.FAIL01, "/board/list", RequestMethod.GET, null);
         }
 
-        return basicContoller.showMessageAndRedirect(message, model);
+        return showMessageAndRedirect(message, model);
     }
 
 
@@ -201,23 +266,14 @@ public class BoardController {
             message = new MessageDTO(Common.FAIL01, "/board/list", RequestMethod.GET, null);
         }
         
-        return basicContoller.showMessageAndRedirect(message, model);
+        return showMessageAndRedirect(message, model);
     }
 
-    @GetMapping("/detail")
-    public String viewBoardDetail(@SessionAttribute(name = "userId", required = false) String userId,
-            @RequestParam("id") String id, Model model) throws Exception {
 
-        System.out.println("=====================DetailController.java<상세보기>=======================");
-        BoardSearchAllDTO boardDTO = boardDetailService.getBoardById(id);
-
-        model.addAttribute("board", boardDTO);
-        // board라는 이름으로 boardDTO 객체를 모델에 추가함.
-        model.addAttribute("userId", userId);
-
-        System.out.println("model:" + model);
-        System.out.println("======================DetailController.java<상세보기 끝> =====================");
-        return "board/detail";
+    //메세지 출력
+    private String showMessageAndRedirect(MessageDTO params, Model model) {
+        model.addAttribute("params", params);
+        System.out.println("model 출력:"+ model);
+        return "fragments/messageRedirect";
     }
-
 }

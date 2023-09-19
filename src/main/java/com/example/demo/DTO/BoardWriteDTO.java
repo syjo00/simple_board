@@ -4,11 +4,70 @@ import lombok.Data;
 
 @Data
 public class BoardWriteDTO {
-    private String id;
+    private int id;
     private String title;
     private String content;
     private String writer;
-    private String UserId;
+    private int UserId;
     private String creation_time;
     private String update_time;
+
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return this.content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getWriter() {
+        return this.writer;
+    }
+
+    public void setWriter(String writer) {
+        this.writer = writer;
+    }
+
+    public int getUserId() {
+        return this.UserId;
+    }
+
+    public void setUserId(int UserId) {
+        this.UserId = UserId;
+    }
+
+    public String getCreation_time() {
+        return this.creation_time;
+    }
+
+    public void setCreation_time(String creation_time) {
+        this.creation_time = creation_time;
+    }
+
+    public String getUpdate_time() {
+        return this.update_time;
+    }
+
+    public void setUpdate_time(String update_time) {
+		this.update_time = update_time;
+	}
+
 }
+

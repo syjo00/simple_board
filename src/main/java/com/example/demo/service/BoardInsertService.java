@@ -16,7 +16,7 @@ public class BoardInsertService {
     /*
      * 게시글 정보 (제목, 작성자, 게시글)은 화면에서, userId는 세션에서 생성 후 합치고, insert 실행.
      */
-    public boolean save(BoardWriteDTO boardWriteDTO, String userId) {
+    public boolean save(BoardWriteDTO boardWriteDTO, int userId) {
 
         boardWriteDTO.setUserId(userId);
         try {

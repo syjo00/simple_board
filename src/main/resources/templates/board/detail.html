@@ -62,10 +62,16 @@
             <th>본문 내용</th>
             <!-- <td th:text="${boardSearchAllDTO.content}">내용입니다.</td> -->
             <td th:text="${board != null ? board.content : 'No content'}">본문내용입니다.</td>
-          </tr>
+          </tr> 
         </tbody>
       </table>
 
+      <div class="down_btn">
+        <a th:href="@{'/downloadFile?filePath=' + ${filePath}}" download>
+            <button>첨부파일 다운로드</button>
+        </a>
+      </div>
+    
 
       <div>
         <th:block th:if="${userId == board.creator}">
