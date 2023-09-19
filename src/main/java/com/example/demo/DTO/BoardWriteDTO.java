@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class BoardWriteDTO {
-    private int id;
+    private int board_id;
     private String title;
     private String content;
     private String writer;
@@ -13,12 +13,12 @@ public class BoardWriteDTO {
     private String update_time;
 
 
-    public int getId() {
-        return this.id;
+    public int getBoard_Id() {
+        return this.board_id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.board_id = id;
     }
 
     public String getTitle() {

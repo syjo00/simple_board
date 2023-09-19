@@ -36,8 +36,8 @@
     <main role="main" class="container" style = "margin-top : 180px">      
           
         <div class="starter-template">
-            <form class="form-horizontal" th:action="@{/board/post/update/{id}}" method="post">   
-              <input type="hidden" name="id" th:value="${board.id}"/>
+            <form class="form-horizontal" th:action="@{/board/post/update/{board_id}}" method="post">   
+              <input type="hidden" name="id" th:value="${board.board_id}"/>
               
               <div class="form-group">
                 <label style="float: left" for="title" class="col-sm-2 control-label">제목</label>
@@ -65,7 +65,7 @@
             
             <div class="box-footer">
               <button type="submit" class="btn btn-primary">저장</button>
-              <a th:href="@{/board/detail/(id=${board.id})}" class="btn btn-primary">뒤로 가기</a>
+              <a th:href="@{/board/detail/(id=${board.board_id})}" class="btn btn-primary">뒤로 가기</a>
             </div>
           </form>
 

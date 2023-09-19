@@ -9,14 +9,15 @@
     <select id="selectAllBoard" resultType="BoardSearchAllDTO">
         SELECT *
         FROM TB_BOARD
-        ORDER BY ID DESC
+        ORDER BY board_id DESC
         limit #{page},#{recordSize}
     </select>
 
     <select id="getmaxboardId" resultType="int">
-        SELECT max(id)
+        SELECT max(board_id)
         FROM TB_BOARD        
     </select>
+
 
 
     <insert id="saveBoard">
@@ -27,7 +28,7 @@
   <!-- 게시물 조회 쿼리 -->
    <select id="getBoardById"  resultType="BoardSearchAllDTO">
       
-      SELECT * FROM TB_BOARD WHERE id = #{id} 
+      SELECT * FROM TB_BOARD WHERE board_id = #{id} 
       
     </select>
 
@@ -57,7 +58,7 @@
 
     <delete id="beleteBoard">
       delete from TB_BOARD
-      where id = #{id}
+      where board_id = #{id}
     </delete>
 
 
@@ -65,7 +66,7 @@
   <select id="updateBoard"  resultType="BoardUpdateDTO">       
       UPDATE TB_BOARD
       SET title = #{title}, content =#{content},writer = #{writer}, update_time = now()
-      WHERE ID = #{id}
+      WHERE board_id = #{id}
   </select>
 
   <select id="countAllBoard"  resultType="int">       
