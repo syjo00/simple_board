@@ -47,6 +47,7 @@ public class BoardController {
     private BoardDetailService boardDetailService;
     private BoardUpdateService boardUpdateService;
     private BasicContoller basicContoller;
+    private FileUploadService fileUploadService;
 
     // 게시판
 
@@ -150,7 +151,7 @@ public class BoardController {
 
             String filename = saveFile.getAbsolutePath();
 
-            FileUploadService.fileupload(boardFileDTO, boardWriteDTO, uploadFile, uuid, filename);
+            fileUploadService.fileupload(boardFileDTO, boardWriteDTO, uploadFile, uuid, filename);
 
             try {
 

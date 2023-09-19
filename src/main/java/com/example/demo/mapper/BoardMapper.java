@@ -42,4 +42,7 @@ public interface BoardMapper {
     //게시글 검색 count 조회.
     public int countSearchBoard(BoardSearchDTO boardSearchDTO);
 
+    //게시글id max값 가져오기
+    public int getmaxboardId();
+
 }

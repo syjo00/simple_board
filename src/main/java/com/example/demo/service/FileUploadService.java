@@ -7,16 +7,20 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.DTO.BoardFileDTO;
 import com.example.demo.DTO.BoardWriteDTO;
+import com.example.demo.mapper.BoardMapper;
 import com.example.demo.mapper.FileMapper;
 
 @Service
 public class FileUploadService{
 
     @Autowired
-    private static FileMapper filedMapper;
+    private  FileMapper filedMapper;
+
+    @Autowired
+    private BoardMapper boardMapper;
 
    
-    public static  boolean fileupload(BoardFileDTO boardFileDTO, BoardWriteDTO boardWriteDTO, List<MultipartFile> uploadFile, String uuid,String filename) {
+    public  boolean fileupload(BoardFileDTO boardFileDTO, BoardWriteDTO boardWriteDTO, List<MultipartFile> uploadFile, String uuid,String filename) {
 
       
         System.out.println("=================== FileUploadService 출력 ====================");
@@ -28,7 +32,8 @@ public class FileUploadService{
 
 
         boardFileDTO.setUuid(uuid); //파일 고유 번호
-        boardFileDTO.setBoard_id(boardWriteDTO.getId()); //게시글 번호
+        //boardFileDTO.setBoard_id(boardWriteDTO.getId()); //게시글 번호
+         boardFileDTO.setBoard_id(boardMapper.getmaxboardId()); //게시글 번호
         boardFileDTO.setFile_name(filename);
         boardFileDTO.setCreator(boardWriteDTO.getWriter()); //creator
         
@@ -39,6 +44,7 @@ public class FileUploadService{
         try {
           filedMapper.saveFile(boardFileDTO);
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
 

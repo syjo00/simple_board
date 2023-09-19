@@ -13,6 +13,12 @@
         limit #{page},#{recordSize}
     </select>
 
+    <select id="getmaxboardId" resultType="int">
+        SELECT max(id)
+        FROM TB_BOARD        
+    </select>
+
+
     <insert id="saveBoard">
       INSERT INTO TB_BOARD(TITLE, CONTENT, WRITER, CREATION_TIME,CREATOR)
       VALUES(#{title},#{content},#{writer},now(),#{userId})

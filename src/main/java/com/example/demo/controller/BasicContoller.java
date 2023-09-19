@@ -51,7 +51,7 @@ public class BasicContoller {
    * @param model
    * @return
    */
-  public String showMessageAndRedirect(final MessageDTO params, Model model) {
+  public String showMessageAndRedirect(MessageDTO params, Model model) {
     model.addAttribute("params", params);
     model.addAttribute("message", params.getMessage());
 

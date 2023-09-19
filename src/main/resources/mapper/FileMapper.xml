@@ -4,13 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mybatis-spring:scan base-package="com.example.demo.mapper" />
 <mapper namespace="com.example.demo.mapper.FileMapper">
 
   <insert id="saveFile">
     INSERT INTO TB_FILE( uuid, board_id, file_name,creation_time,creator,update_time,updater)
     VALUES(#{uuid},#{board_id},#{file_name},now(),#{creator},#{update_time},#{updater})
-   </insert>
+  </insert>
+
+  
 
 
 </mapper>
