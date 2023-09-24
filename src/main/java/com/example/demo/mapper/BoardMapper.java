@@ -31,7 +31,7 @@ public interface BoardMapper {
     List<BoardSearchAllDTO> getSearch(BoardSearchDTO boardSearchDTO);
 
     // 게시글 삭제.
-    public void beleteBoard(String id);
+    public void deleteBoard(String board_id);
 
     // 게시글 수정
     public void updateBoard(BoardUpdateDTO updatedto);

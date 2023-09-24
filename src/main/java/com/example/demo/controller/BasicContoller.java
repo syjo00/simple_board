@@ -51,12 +51,15 @@ public class BasicContoller {
    * @param model
    * @return
    */
-  public String showMessageAndRedirect(MessageDTO params, Model model) {
-    model.addAttribute("params", params);
-    model.addAttribute("message", params.getMessage());
+  public String showMessageAndRedirect(MessageDTO message, Model model) {
 
-    System.out.println("showMessageAndRedirect + " + model);
+    model.addAttribute("params", message);
+    model.addAttribute("message", message.getMessage());
+
+    System.out.println("showMessageAndRedirect/params 메세지 출력1+ " + message);
+    System.out.println("showMessageAndRedirect/params.getMessage 메세지 출력2 + " + message.getMessage());
 
     return "fragments/messageRedirect";
+    
   }
 }

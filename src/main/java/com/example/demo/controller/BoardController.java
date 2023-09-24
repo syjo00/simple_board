@@ -75,7 +75,7 @@ public class BoardController {
         } else {
             // 게시판 전체 조회
             boardList = boardSelectService.getAllBoard(pageNum);
-            ;
+            
         }
 
         // 검색한거 남길때 null로 그대로 들어가는 경우가 있어. null로 닦아주기.
@@ -176,6 +176,8 @@ public class BoardController {
 
     }// write();
 
+
+
     private boolean isBoardDataValid(BoardWriteDTO boardWriteDTO) {
         System.out.println("boardWriteDTO-boolean 출력 : " + boardWriteDTO);
         return (boardWriteDTO.getTitle() == "" ||
@@ -183,39 +185,48 @@ public class BoardController {
                 boardWriteDTO.getContent() == "");
     }
 
+
+
     // 게시물 삭제는 PostMapping 메서드를 사용하여 간단하게 삭제할 수 있다.
-    @PostMapping("/post/{no}")
-    public String delete(@PathVariable("no") String no, Model model) {
+    @PostMapping("/post/{board_id}")
+    public String delete(@PathVariable("board_id") String board_id,Model model) {
 
         MessageDTO message;
+        System.out.println("삭제 board_id"+board_id);      
 
-        if (boardDeleteService.delete(no)) {
+        if (boardDeleteService.delete(board_id)) {
             message = new MessageDTO(Common.DELETESUCCES01, "/board/list", RequestMethod.GET, null);
+             System.out.println("삭제 메세지 : " + message);
+
         } else {
             message = new MessageDTO(Common.FAIL01, "/board/list", RequestMethod.GET, null);
+             System.out.println("삭제 메세지 : " + message);
         }
-
-        return basicContoller.showMessageAndRedirect(message, model);
+          return basicContoller.showMessageAndRedirect(message,model);
     }
+
+
 
     /* 정상작동 */
     // 게시물 수정 페이지이며, {id}로 페이지 넘버를 받는다.
 
     @GetMapping("/edit/update/{id}")
-    public String edit(@PathVariable("id") String id, Model model) throws Exception {
+    public String edit(@PathVariable("id") String board_id, Model model) throws Exception {
 
-        System.out.println("받은 업데이트 데이터: " + id);
+        System.out.println("받은 업데이트 데이터: " + board_id);
         // id를 기반으로 해당 게시물 정보를 가져와서 수정 화면에 뿌려준다는 가정하에...
         // BoardUpdateDTO boardUpdateDTO = new BoardUpdateDTO(); // 또는 해당 DTO 생성 방식으로
         // 초기화
         // boardSearchAllDTO.setId(id); // DTO에 id 설정
 
-        BoardSearchAllDTO boardDTO = boardDetailService.getBoardById(id);
+        BoardSearchAllDTO boardDTO = boardDetailService.getBoardById(board_id);
+
+        System.out.println("boardDTO - boardDetailService에서 받은 데이터 " +  boardDTO);
 
         model.addAttribute("board", boardDTO);
         // board라는 이름으로 boardDTO 객체를 모델에 추가함.
 
-        System.out.println("board:" + boardDTO);
+        System.out.println("update할 데이터를 model에 담음." + model);
 
         return "board/update";
     }
@@ -226,17 +237,30 @@ public class BoardController {
     @PostMapping("/post/update/{id}")
     // public String resave(BoardWriteDTO boardWriteDTO) {
     public String resave(BoardUpdateDTO boardUpdateDTO, Model model) {
-
+        
+        System.out.println("==============수정 후 저장 (BoardController.java)==============");
+        
         MessageDTO message;
-
+        
         if (boardUpdateService.updateBoard(boardUpdateDTO)) {
+
+            System.out.println("업데이트 boardUpdateDTO 출력" + boardUpdateDTO);
+
             message = new MessageDTO(Common.UPDATESUCCESEE01, "/board/list", RequestMethod.GET, null);
+           
+            System.out.println("업데이트 메세지 : " + message);
+
         } else {
             message = new MessageDTO(Common.FAIL01, "/board/list", RequestMethod.GET, null);
-        }
 
+            System.out.println("업데이트 메세지 : " + message);
+        }
+         
         return basicContoller.showMessageAndRedirect(message, model);
+       
+        
     }
+
 
     @GetMapping("/detail")
     public String viewBoardDetail(@SessionAttribute(name = "userId", required = false) String userId,

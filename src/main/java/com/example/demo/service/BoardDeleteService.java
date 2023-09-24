@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.mapper.BoardMapper;
 
+
+
 @Service
 public class BoardDeleteService {
 
@@ -12,11 +14,13 @@ public class BoardDeleteService {
     private BoardMapper boardMapper;
 
 
-    public boolean delete(String id) {
+    public boolean delete(String board_id) {
         try {
-            boardMapper.beleteBoard(id);
+            boardMapper.deleteBoard(board_id);
         } catch (Exception e) {
-            return false;
+         
+            e.printStackTrace();
+           System.out.println("삭제실패");
         }
 
         return true;

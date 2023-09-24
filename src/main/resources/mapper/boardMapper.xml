@@ -56,9 +56,9 @@
         limit #{page},#{recordSize}
     </select>
 
-    <delete id="beleteBoard">
+    <delete id="deleteBoard">
       delete from TB_BOARD
-      where board_id = #{id}
+      where board_id = #{board_id}
     </delete>
 
 

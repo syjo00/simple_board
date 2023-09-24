@@ -81,7 +81,7 @@
         </a>
 
         <form id="delete-form" th:action="@{'/board/post/' + ${board.board_id}}" method="post">
-          <input type="hidden" name="_method" value="delete" />
+          <input type="hidden" name="delete_method" value="delete" />
           <button class="btn btn-warning" id="delete-btn">삭제</button>
         </form>
         </th:block>
